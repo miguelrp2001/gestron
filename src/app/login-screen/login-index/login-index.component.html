@@ -1,1 +1,30 @@
-<p>login-index works!</p>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<app-backwimage [wallpaper]="fondo">
+    <div class="back">
+        <mat-card class="loginbui">
+            <form [formGroup]="formularioLogin" (ngSubmit)="login()">
+                <mat-card-title>Iniciar sesión</mat-card-title>
+                <mat-card-content class="login-card formularioLogin">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Correo</mat-label>
+                        <input formControlName="correo" matInput type="email" placeholder="yo@dominio.com">
+                        <mat-icon matPrefix>email</mat-icon>
+                        <mat-hint></mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <input formControlName="passwd" matInput type="password">
+                        <mat-icon matPrefix>key</mat-icon>
+                        <mat-hint></mat-hint>
+                    </mat-form-field>
+                    <mat-slide-toggle> Mantener la sesión iniciada
+                    </mat-slide-toggle>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button (click)="registro()" mat-stroked-button color="accent">Solicitar cuenta</button>
+                    <button type="submit" mat-stroked-button color="primary">Iniciar sesión</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+</app-backwimage>

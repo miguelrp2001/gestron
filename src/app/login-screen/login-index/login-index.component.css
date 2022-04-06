@@ -1,0 +1,22 @@
+.back {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.formularioLogin {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginbui {
+    margin-top: 2em;
+}
+
+p {
+    margin: 1em;
+}

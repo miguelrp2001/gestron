@@ -4,8 +4,8 @@ import { DashIndexComponent } from './dashboard/dash-index/dash-index.component'
 import { LoginIndexComponent } from './login-screen/login-index/login-index.component';
 
 const routes: Routes = [
-  { path: "/", component: DashIndexComponent },
-  { path: "/login", component: LoginIndexComponent }
+  { path: "", component: DashIndexComponent },
+  { path: "login", component: LoginIndexComponent }
 ];
 
 @NgModule({
