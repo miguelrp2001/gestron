@@ -9,20 +9,21 @@
                         <mat-label>Correo</mat-label>
                         <input formControlName="email" matInput type="email" placeholder="yo@dominio.com">
                         <mat-icon matPrefix>email</mat-icon>
-                        <mat-hint></mat-hint>
+                        <mat-error color="red">{{ mailErrorMessage('email','El correo no es válido') }}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Contraseña</mat-label>
                         <input formControlName="password" matInput type="password">
                         <mat-icon matPrefix>key</mat-icon>
-                        <mat-hint></mat-hint>
+                        <mat-error>{{ mailErrorMessage('password','La contraseña debe tener al menos 6 caracteres') }}</mat-error>
                     </mat-form-field>
                     <mat-slide-toggle> Mantener la sesión iniciada
                     </mat-slide-toggle>
                 </mat-card-content>
-                <mat-card-actions>
-                    <button (click)="registro()" mat-stroked-button color="accent">Solicitar cuenta</button>
+                <mat-card-actions style="display: flex; flex-direction: column; justify-content: center; gap: .2em; text-align: center;">
                     <button type="submit" mat-stroked-button color="primary">Iniciar sesión</button>
+                    <span style="display: block; ">o</span>
+                    <button (click)="registro()" mat-button color="accent">Solicite una cuenta</button>
                 </mat-card-actions>
             </form>
         </mat-card>

@@ -10,6 +10,9 @@ import { mergeMap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { AuthStateService } from '../../services/auth-state.service';
+import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { Input } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-login-index',
@@ -18,10 +21,16 @@ import { AuthStateService } from '../../services/auth-state.service';
 })
 export class LoginIndexComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private wallService: LoginwallapiService, private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService) {
+  constructor(private fb: FormBuilder, private wallService: LoginwallapiService, private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) {
     wallService.getWallpaper().subscribe((resp: Wallpaper[]) => {
       this.fondo = resp[6];
       this.loading = false;
+    })
+
+    this.authState.userAuthState.subscribe(r => {
+      if (r) {
+        this.router.navigate(['/']);
+      }
     })
   }
   formularioLogin: FormGroup = this.fb.group({
@@ -35,16 +44,17 @@ export class LoginIndexComponent implements OnInit {
 
   errores: any = null;
 
-  mailErrorMessage() {
-    let input: any = this.formularioLogin.get('correo') || null;
+  mailErrorMessage(inputName: string, inputShow: string) {
+    let input = this.formularioLogin.get(inputName) || null;
 
-    if (input) {
+    if (input && input?.touched) {
 
       if (input.hasError('required') || false) {
-        return 'You must enter a value';
+        return 'Debe introducir un valor.';
       }
+      console.log();
 
-      return input.hasError('email') ? 'Not a valid email' : '';
+      return input.invalid ? inputShow + '.' : '';
     }
     return "";
 
@@ -63,9 +73,14 @@ export class LoginIndexComponent implements OnInit {
     } else {
       this.authService.login(this.formularioLogin.value).subscribe((res) => {
         this.procesarRespuesta(res);
+        console.log(res);
       },
         (error) => {
           this.errores = error.error;
+          console.warn(error.error);
+          if (error.error.error && error.error.error == "Unauthorized") {
+            let snackBarRef = this.snackBar.open("Credenciales inválidos.", '', { duration: 5000 });
+          }
         },
         () => {
           this.authState.setAuthState(true);
@@ -80,6 +95,7 @@ export class LoginIndexComponent implements OnInit {
 
   procesarRespuesta(datos: any) {
     this.token.handleData(datos.access_token);
+    let snackBarRef = this.snackBar.open("Bienvenido de nuevo, " + datos.user.name, '', { duration: 5000 });
   }
 
 

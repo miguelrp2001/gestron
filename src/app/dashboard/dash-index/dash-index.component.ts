@@ -15,13 +15,15 @@ export class DashIndexComponent implements OnInit {
 
   constructor(private authState: AuthStateService, private router: Router, private authService: AuthService) {
 
-    if (!this.authState.userAuthState) {
-      this.router.navigate(['login']);
-    } else {
-      this.authService.profile().subscribe((res: User) => {
-        this.user = res;
-      })
-    }
+    this.authState.userAuthState.subscribe(r => {
+      if (!r) {
+        this.router.navigate(['login']);
+      } else {
+        this.authService.profile().subscribe((res: User) => {
+          this.user = res;
+        })
+      }
+    })
 
   }
 

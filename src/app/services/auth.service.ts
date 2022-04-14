@@ -23,6 +23,9 @@ export class AuthService {
 
   profile(): Observable<any> {
     return this.http.get(APIURL + 'user-profile');
+  }
 
+  logout(): Observable<any> {
+    return this.http.post(APIURL + 'logout', {});
   }
 }
