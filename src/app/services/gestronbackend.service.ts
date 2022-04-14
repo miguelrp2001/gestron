@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { User } from '../interfaces/user';
-import { mergeMap, Observable } from 'rxjs';
+import { mergeMap, Observable, tap } from 'rxjs';
 import { Token } from '../interfaces/token';
 
 const BACKENDNOAPI = "http://127.0.0.1:8000/";
@@ -19,14 +19,15 @@ export class GestronbackendService {
 
   constructor(private http: HttpClient) {
 
+    this.wsanctum()
+
     console.log('Checking token');
 
-    if (localStorage.getItem('ges_tok')) {
+    if (false && localStorage.getItem('ges_tok')) {
       this.relogin(localStorage.getItem('ges_tok') || "").subscribe((resp: User) => {
         this.loggedUser = resp;
         this.loggedToken = localStorage.getItem('ges_tok') || "";
         console.log(resp);
-
       },
         error => {
           console.error(error);
@@ -34,15 +35,13 @@ export class GestronbackendService {
     }
   }
 
-  private wsanctum() {
-    return this.http.get(BACKENDNOAPI + "sanctum/csrf-cookie");
+  private wsanctum(): Observable<HttpResponse<Object>> {
+    return this.http.get<HttpResponse<Object>>(BACKENDNOAPI + "sanctum/csrf-cookie");
   }
 
   public login(email: string, password: string): Observable<Token> {
     const params = new HttpParams().set('email', email).set('password', password);
-    return this.wsanctum().pipe(mergeMap(res => {
-      return this.http.post<Token>(BACKEND + 'login', { res, params });
-    }))
+    return this.http.post<Token>(BACKEND + 'login', { params });
 
   }
 

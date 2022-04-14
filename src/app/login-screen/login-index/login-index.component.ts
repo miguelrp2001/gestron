@@ -7,6 +7,9 @@ import { RegisterFormComponent } from '../register-form/register-form.component'
 import { GestronbackendService } from 'src/app/services/gestronbackend.service';
 import { Token } from '../../interfaces/token';
 import { mergeMap } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { TokenService } from '../../services/token.service';
+import { AuthStateService } from '../../services/auth-state.service';
 
 @Component({
   selector: 'app-login-index',
@@ -15,20 +18,22 @@ import { mergeMap } from 'rxjs';
 })
 export class LoginIndexComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private wallService: LoginwallapiService, private dialog: MatDialog, public backend: GestronbackendService) {
+  constructor(private fb: FormBuilder, private wallService: LoginwallapiService, private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService) {
     wallService.getWallpaper().subscribe((resp: Wallpaper[]) => {
       this.fondo = resp[6];
       this.loading = false;
     })
   }
   formularioLogin: FormGroup = this.fb.group({
-    correo: ['', [Validators.required, Validators.email]],
-    passwd: ['', [Validators.required, Validators.minLength(8)]]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
   })
 
   loading = true;
 
   fondo: Wallpaper = {} as Wallpaper;
+
+  errores: any = null;
 
   mailErrorMessage() {
     let input: any = this.formularioLogin.get('correo') || null;
@@ -56,9 +61,16 @@ export class LoginIndexComponent implements OnInit {
     if (this.formularioLogin.invalid) {
       this.formularioLogin.markAllAsTouched();
     } else {
-
-      this.backend.login(this.formularioLogin.get('correo')?.value, this.formularioLogin.get('passwd')?.value).subscribe((resp: Token) => console.log(resp))
-
+      this.authService.login(this.formularioLogin.value).subscribe((res) => {
+        this.procesarRespuesta(res);
+      },
+        (error) => {
+          this.errores = error.error;
+        },
+        () => {
+          this.authState.setAuthState(true);
+          this.formularioLogin.reset();
+        })
     }
   }
 
@@ -66,6 +78,9 @@ export class LoginIndexComponent implements OnInit {
 
   }
 
+  procesarRespuesta(datos: any) {
+    this.token.handleData(datos.access_token);
+  }
 
 
 }

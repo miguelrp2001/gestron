@@ -9,9 +9,10 @@ import { environment } from '../environments/environment';
 import { MaterialModule } from './material/material.module';
 import { LoginScreenModule } from './login-screen/login-screen.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,13 +33,15 @@ import { SharedModule } from './shared/shared.module';
     DashboardModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'XSRF-TOKEN',
-      headerName: 'X-XSRF-TOKEN'
-    })
+    SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

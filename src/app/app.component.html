@@ -1,12 +1,15 @@
 <mat-toolbar color="primary">
     <span [routerLink]="['/']" routerLinkActive="router-link-active">Gestrón</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>help</mat-icon>
-  </button>
-    <button [routerLink]="['/login']" routerLinkActive="router-link-active" mat-stroked-button color="accent" aria-label="Example icon-button with heart icon">
+    <span>Hola</span>
+    <span class="example-spacer"></span>
+    <button *ngIf="!sesionIniciada()" [routerLink]="['/login']" routerLinkActive="router-link-active" mat-stroked-button color="accent" aria-label="Botón iniciar sesión.">
     <mat-icon>person</mat-icon>
     Iniciar sesión
+  </button>
+    <button *ngIf="sesionIniciada()" mat-stroked-button color="accent" aria-label="Botón cerrar sesión.">
+    <mat-icon>logout</mat-icon>
+    Cerrar sesión
   </button>
 </mat-toolbar>
 <div class="content">
