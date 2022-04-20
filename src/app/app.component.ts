@@ -4,6 +4,9 @@ import { AuthStateService } from './services/auth-state.service';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConnectionErrorComponent } from './shared/connection-error/connection-error.component';
+import { LoadingDialogComponent } from './shared/loading-dialog/loading-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +17,36 @@ export class AppComponent {
   title = 'gestron';
   sesionStatus = false;
 
-  constructor(private authService: AuthService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) {
+  constructor(private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) {
+    let dialogLoading = this.dialog.open(LoadingDialogComponent, {
+      disableClose: true,
+    });
+
     this.authState.userAuthState.subscribe(r => {
       if (r) {
         this.sesionStatus = true;
+        this.authService.profile().subscribe(res => {
+          dialogLoading.close();
+          console.log("ok");
+        }, error => {
+          dialogLoading.close();
+          console.log("Ha ocurrido un error");
+          console.log(error);
+          if (error.ok == false && error.status == 0) {
+            console.error("Error conectando al backend.");
+            let dialogRef = this.dialog.open(ConnectionErrorComponent, {
+              disableClose: true,
+            });
+          }
+          if (error.status == 401) {
+            this.authState.setAuthState(false);
+            this.token.removeToken();
+            let snackBarRef = this.snackBar.open('La sesión ha expirado.', '', { duration: 5000 });
+            this.router.navigate(['login'])
+          }
+        })
       } else {
+        dialogLoading.close();
         this.sesionStatus = false;
       }
     })

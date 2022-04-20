@@ -23,7 +23,7 @@ export class LoginIndexComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private wallService: LoginwallapiService, private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) {
     wallService.getWallpaper().subscribe((resp: Wallpaper[]) => {
-      this.fondo = resp[6];
+      this.fondo = resp[0];
       this.loading = false;
     })
 
@@ -39,6 +39,7 @@ export class LoginIndexComponent implements OnInit {
   })
 
   loading = true;
+  iniciandoSesion = false;
 
   fondo: Wallpaper = {} as Wallpaper;
 
@@ -71,11 +72,14 @@ export class LoginIndexComponent implements OnInit {
     if (this.formularioLogin.invalid) {
       this.formularioLogin.markAllAsTouched();
     } else {
+      this.iniciandoSesion = true;
       this.authService.login(this.formularioLogin.value).subscribe((res) => {
         this.procesarRespuesta(res);
         console.log(res);
+        this.iniciandoSesion = false;
       },
         (error) => {
+          this.iniciandoSesion = false;
           this.errores = error.error;
           console.warn(error.error);
           if (error.error.error && error.error.error == "Unauthorized") {
@@ -85,6 +89,7 @@ export class LoginIndexComponent implements OnInit {
         () => {
           this.authState.setAuthState(true);
           this.formularioLogin.reset();
+          this.iniciandoSesion = false;
         })
     }
   }

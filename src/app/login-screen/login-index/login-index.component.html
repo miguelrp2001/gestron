@@ -17,13 +17,15 @@
                         <mat-icon matPrefix>key</mat-icon>
                         <mat-error>{{ mailErrorMessage('password','La contraseña debe tener al menos 6 caracteres') }}</mat-error>
                     </mat-form-field>
-                    <mat-slide-toggle> Mantener la sesión iniciada
+                    <mat-slide-toggle *ngIf="false"> Mantener la sesión iniciada
                     </mat-slide-toggle>
                 </mat-card-content>
                 <mat-card-actions style="display: flex; flex-direction: column; justify-content: center; gap: .2em; text-align: center;">
-                    <button type="submit" mat-stroked-button color="primary">Iniciar sesión</button>
+                    <button type="submit" mat-stroked-button color="primary">Iniciar sesión
+                      <mat-progress-bar *ngIf="iniciandoSesion" mode="indeterminate" class="pBarButton"></mat-progress-bar>
+                  </button>
                     <span style="display: block; ">o</span>
-                    <button (click)="registro()" mat-button color="accent">Solicite una cuenta</button>
+                    <a (click)="registro()" mat-button color="accent">Solicite una cuenta</a>
                 </mat-card-actions>
             </form>
         </mat-card>
