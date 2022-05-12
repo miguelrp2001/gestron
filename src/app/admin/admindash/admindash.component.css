@@ -1,0 +1,14 @@
+app-tabla-usuarios {
+    width: 100%;
+}
+
+div.backg {
+    padding: 1em;
+}
+
+.progressspin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

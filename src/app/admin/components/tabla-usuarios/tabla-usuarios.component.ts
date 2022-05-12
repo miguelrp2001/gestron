@@ -1,0 +1,69 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { User, GestronRequest } from '../../../interfaces/user';
+import { GestronbackendService } from '../../../services/gestronbackend.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+import { Observable, map, shareReplay } from 'rxjs';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
+@Component({
+  selector: 'app-tabla-usuarios',
+  templateUrl: './tabla-usuarios.component.html',
+  styleUrls: ['./tabla-usuarios.component.css']
+})
+export class TablaUsuariosComponent implements OnInit {
+
+  @Input() usuarios: User[] = [];
+
+  @Output() updateUsuarios = new EventEmitter<string>();
+
+  constructor(private breakpointObserver: BreakpointObserver, private apibackend: GestronbackendService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
+
+  ngOnInit(): void {
+  }
+
+  updateStatus(slider: any) {
+    slider = slider.source;
+    slider.disabled = true;
+    this.apibackend.alternateUser(Number.parseInt(slider.id), slider.checked).subscribe((res: GestronRequest) => {
+      slider.checked = (res.data.mensaje as unknown) as boolean
+      slider.disabled = false;
+    }, (err) => {
+      let snackBarRef = this.snackBar.open("No se ha podido cambiar el estado.", '', { duration: 5000 });
+      slider.checked = !slider.checked;
+      slider.disabled = false;
+    })
+  }
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+
+  editUser(usered: User) {
+    const dialogoEditar = this.dialog.open(EditUserComponent, {
+      width: '100%',
+      data: { user: usered }
+    })
+    dialogoEditar.afterClosed().subscribe(result => {
+      this.apibackend.updateUser(result).subscribe((res: GestronRequest) => {
+        this.updateUsuarios.emit('upd');
+        let snackBarRef = this.snackBar.open("Usuario actualizado con éxito.", '', { duration: 5000 });
+      });
+
+    })
+  }
+
+
+  logAllOut(usered: User) {
+    this.apibackend.logAllOut(usered.id as number).subscribe((res: GestronRequest) => {
+      let snackBarRef = this.snackBar.open(res.data.mensaje || 'Listo', '', { duration: 3000 });
+    })
+  }
+
+
+}

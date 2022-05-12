@@ -13,6 +13,7 @@ import { AuthStateService } from '../../services/auth-state.service';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Input } from '@angular/compiler/src/core';
+import { GestronRequest } from '../../interfaces/user';
 
 @Component({
   selector: 'app-login-index',
@@ -21,9 +22,13 @@ import { Input } from '@angular/compiler/src/core';
 })
 export class LoginIndexComponent implements OnInit {
 
+  posfondo = Math.floor(Math.random() * (6));
+
   constructor(private fb: FormBuilder, private wallService: LoginwallapiService, private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) {
     wallService.getWallpaper().subscribe((resp: Wallpaper[]) => {
-      this.fondo = resp[0];
+      this.fondo = resp[this.posfondo];
+      this.loading = false;
+    }, (error) => {
       this.loading = false;
     })
 
@@ -53,8 +58,6 @@ export class LoginIndexComponent implements OnInit {
       if (input.hasError('required') || false) {
         return 'Debe introducir un valor.';
       }
-      console.log();
-
       return input.invalid ? inputShow + '.' : '';
     }
     return "";
@@ -73,17 +76,20 @@ export class LoginIndexComponent implements OnInit {
       this.formularioLogin.markAllAsTouched();
     } else {
       this.iniciandoSesion = true;
-      this.authService.login(this.formularioLogin.value).subscribe((res) => {
-        this.procesarRespuesta(res);
-        console.log(res);
+      this.authService.login(this.formularioLogin.value).subscribe((res: GestronRequest) => {
+        this.procesarRespuesta(res.data);
         this.iniciandoSesion = false;
       },
         (error) => {
           this.iniciandoSesion = false;
           this.errores = error.error;
-          console.warn(error.error);
-          if (error.error.error && error.error.error == "Unauthorized") {
+          console.warn(error);
+          if (error.error.data && error.error.data.mensaje == "no me sirve") {
             let snackBarRef = this.snackBar.open("Credenciales inválidos.", '', { duration: 5000 });
+            this.formularioLogin.get('password')?.setValue("");
+            this.formularioLogin.get('password')?.markAsPending;
+          } else {
+            let snackBarRef = this.snackBar.open("Error al conectar con el servidor.", '', { duration: 5000 });
           }
         },
         () => {
@@ -96,10 +102,12 @@ export class LoginIndexComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.posfondo = Math.floor(Math.random() * (6));
+
   }
 
   procesarRespuesta(datos: any) {
-    this.token.handleData(datos.access_token);
+    this.token.handleData(datos.token);
     let snackBarRef = this.snackBar.open("Bienvenido de nuevo, " + datos.user.name, '', { duration: 5000 });
   }
 

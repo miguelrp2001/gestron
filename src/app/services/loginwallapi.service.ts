@@ -18,6 +18,6 @@ export class LoginwallapiService {
 
   getWallpaper(): Observable<Wallpaper[]> {
     const params = new HttpParams().set('country', 'es');
-    return this.http.get<Wallpaper[]>(URL, { params });
+    return this.http.get<Wallpaper[]>(URL, {});
   }
 }

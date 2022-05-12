@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Editando {{data.user.name}}</h2>
+<mat-dialog-content>
+    <form [formGroup]="editarUsuario">
+        <mat-form-field appearance="outline">
+            <mat-label>Código</mat-label>
+            <input formControlName="id" [readonly]="true" matNativeControl type="number" placeholder="1">
+            <mat-icon matPrefix>badge</mat-icon>
+            <mat-error color="red"></mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Correo</mat-label>
+            <input formControlName="email" [readonly]="false" matNativeControl type="email" placeholder="yo@dominio.com">
+            <mat-icon matPrefix>email</mat-icon>
+            <mat-error color="red">{{ mailErrorMessage('email','El correo no es válido') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" [readonly]="false" matNativeControl type="email" placeholder="yo@dominio.com">
+            <mat-icon matPrefix>account_circle</mat-icon>
+            <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input formControlName="telefono" [readonly]="false" matNativeControl type="phone" placeholder="666555444">
+            <mat-icon matPrefix>phone</mat-icon>
+            <mat-error color="red">{{ mailErrorMessage('telefono','El teléfono no es válido') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>IP Registro</mat-label>
+            <input formControlName="ipRegistro" [readonly]="true" matNativeControl type="string" placeholder="0.0.0.0">
+            <mat-icon matPrefix>cloud_done</mat-icon>
+            <mat-error color="red"></mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>IP Último Login</mat-label>
+            <input formControlName="ipUltLogin" [readonly]="true" matNativeControl type="string" placeholder="0.0.0.0">
+            <mat-icon matPrefix>login</mat-icon>
+            <mat-error color="red"></mat-error>
+        </mat-form-field>
+
+        <button mat-stroked-button [mat-dialog-close]="editarUsuario.value">Listo</button>
+    </form>
+
+</mat-dialog-content>

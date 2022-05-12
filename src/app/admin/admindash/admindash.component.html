@@ -1,0 +1,11 @@
+<div class="backg">
+    <mat-card>
+        <mat-card-content>
+            <div class="progressspin" *ngIf="usuarios.length<1">
+                <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+            </div>
+            <app-tabla-usuarios *ngIf="usuarios.length>0" [usuarios]="usuarios" (updateUsuarios)="updateUsers()">
+            </app-tabla-usuarios>
+        </mat-card-content>
+    </mat-card>
+</div>

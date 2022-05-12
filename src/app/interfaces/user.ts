@@ -1,25 +1,40 @@
 // To parse this data:
 //
-//   import { Convert, User } from "./file";
+//   import { Convert, GestronRequest } from "./file";
 //
-//   const user = Convert.toUser(json);
+//   const gestronRequest = Convert.toGestronRequest(json);
+
+export interface GestronRequest {
+  status: string;
+  data: Data;
+}
+
+export interface Data {
+  user?: User;
+  mensaje?: string;
+  users: User[];
+}
 
 export interface User {
-  id: number;
   name: string;
   email: string;
-  email_verified_at: null;
-  created_at: Date;
-  updated_at: Date;
+  telefono: string;
+  admin?: boolean;
+  activo?: boolean;
+  created_at?: Date;
+  updated_at?: Date;
+  id?: number;
+  ipRegistro?: string;
+  ipUltLogin?: string;
 }
 
 // Converts JSON strings to/from your types
 export class Convert {
-  public static toUser(json: string): User {
+  public static toGestronRequest(json: string): GestronRequest {
     return JSON.parse(json);
   }
 
-  public static userToJson(value: User): string {
+  public static gestronRequestToJson(value: GestronRequest): string {
     return JSON.stringify(value);
   }
 }

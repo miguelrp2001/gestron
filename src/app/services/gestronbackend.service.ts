@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { User } from '../interfaces/user';
-import { mergeMap, Observable, tap } from 'rxjs';
-import { Token } from '../interfaces/token';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User, GestronRequest } from '../interfaces/user';
+import { Observable } from 'rxjs';
 
 const BACKENDNOAPI = "http://127.0.0.1:8000/";
 const BACKEND = BACKENDNOAPI + "api/";
@@ -19,34 +18,6 @@ export class GestronbackendService {
 
   constructor(private http: HttpClient) {
 
-    this.wsanctum()
-
-    console.log('Checking token');
-
-    if (false && localStorage.getItem('ges_tok')) {
-      this.relogin(localStorage.getItem('ges_tok') || "").subscribe((resp: User) => {
-        this.loggedUser = resp;
-        this.loggedToken = localStorage.getItem('ges_tok') || "";
-        console.log(resp);
-      },
-        error => {
-          console.error(error);
-        });
-    }
-  }
-
-  private wsanctum(): Observable<HttpResponse<Object>> {
-    return this.http.get<HttpResponse<Object>>(BACKENDNOAPI + "sanctum/csrf-cookie");
-  }
-
-  public login(email: string, password: string): Observable<Token> {
-    const params = new HttpParams().set('email', email).set('password', password);
-    return this.http.post<Token>(BACKEND + 'login', { params });
-
-  }
-
-  public setUser(user: User) {
-    this.loggedUser = user;
   }
 
   protected relogin(token: string): Observable<User> {
@@ -57,4 +28,23 @@ export class GestronbackendService {
     return this.http.get<User>(BACKEND + 'user', { 'headers': headers });
 
   }
+
+
+  public allUsers(): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'users/list', {});
+  }
+
+  public alternateUser(id: number, estado?: boolean): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'users/' + id + '/alternate', { estado: estado });
+  }
+
+  public updateUser(user: User): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'users/' + user.id + '/edit', { email: user.email, telefono: user.telefono, name: user.name });
+  }
+
+
+  public logAllOut(id: number): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'users/' + id + '/logout', {});
+  }
+
 }
