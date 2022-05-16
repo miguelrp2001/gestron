@@ -30,6 +30,7 @@ export class TablaUsuariosComponent implements OnInit {
     this.apibackend.alternateUser(Number.parseInt(slider.id), slider.checked).subscribe((res: GestronRequest) => {
       slider.checked = (res.data.mensaje as unknown) as boolean
       slider.disabled = false;
+      let snackBarRef = this.snackBar.open("El usuario ahora está " + (slider.checked ? "activado." : "desactivado."), '', { duration: 5000 });
     }, (err) => {
       let snackBarRef = this.snackBar.open("No se ha podido cambiar el estado.", '', { duration: 5000 });
       slider.checked = !slider.checked;
