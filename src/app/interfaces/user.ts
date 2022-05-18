@@ -4,11 +4,13 @@ export interface GestronRequest {
 }
 
 export interface Data {
-  user?: User;
   mensaje?: string;
+  user?: User;
   users?: User[];
   centro?: Centro;
   centros?: Centro[];
+  articulo?: Articulo;
+  articulos?: Articulo[];
 }
 
 export interface User {
@@ -22,6 +24,18 @@ export interface User {
   ipUltLogin?: string;
   created_at?: Date;
   updated_at?: Date;
+}
+
+export interface Articulo {
+  id: number;
+  estado: string;
+  nombre: string;
+  nombre_corto: string;
+  color: string;
+  familia_id: number;
+  created_at?: null;
+  updated_at?: null;
+  laravel_through_key?: number;
 }
 
 export interface Centro {

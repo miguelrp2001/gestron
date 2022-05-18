@@ -56,6 +56,10 @@ export class GestronbackendService {
     return this.http.get<GestronRequest>(BACKEND + 'centros/' + centro.id + '/admins');
   }
 
+  public obtenerArticulos(centro: Centro): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'articulos/' + centro.id + '/list');
+  }
+
   public obtenerNotAdminCentro(centro: Centro): Observable<GestronRequest> {
     return this.http.get<GestronRequest>(BACKEND + 'centros/' + centro.id + '/notadmins');
   }
