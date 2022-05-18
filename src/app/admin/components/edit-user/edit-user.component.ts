@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/interfaces/user';
 
-export interface DiagReceived { user: User; };
+export interface DiagReceived { user: User; errors?: { [key: string]: Errors }; };
+export interface Errors { name?: string[], email?: string[], telefono?: string[] };
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -15,6 +16,8 @@ export class EditUserComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<DiagReceived>,
     @Inject(MAT_DIALOG_DATA) public data: DiagReceived,) {
+    console.log(this.data);
+
 
   }
 

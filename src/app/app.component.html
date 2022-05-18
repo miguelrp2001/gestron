@@ -29,6 +29,20 @@
             </button>
 
 
+            <button *ngIf="sesionIniciada() && centros().length>0" mat-stroked-button color="accent" aria-label="Menú de usuario." [matMenuTriggerFor]="selectorCentro" (click)="updCentro()">
+              <mat-icon>business</mat-icon>
+              {{getCentroSeleccionado().nombre}}
+            </button>
+
+            <mat-menu #selectorCentro="matMenu">
+                <button mat-menu-item *ngFor="let centro of centros()" aria-label="centro.nombre" (click)="setCentro(centro)" title="Cambiar a {{centro.nombre}} ({{centro.nombre_legal}})">
+                <mat-icon>business</mat-icon>
+                {{centro.nombre}} ({{centro.nombre_legal}})
+              </button>
+            </mat-menu>
+
+            <span class="space2"></span>
+
             <button *ngIf="sesionIniciada() && user().name" mat-stroked-button color="accent" aria-label="Menú de usuario." [matMenuTriggerFor]="menuUsuario">
               <mat-icon>person</mat-icon>
               {{user().name}}

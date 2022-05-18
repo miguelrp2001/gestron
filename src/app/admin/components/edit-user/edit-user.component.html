@@ -1,5 +1,10 @@
 <h2 mat-dialog-title>Editando {{data.user.name}}</h2>
 <mat-dialog-content>
+    <div class="errors" *ngIf="data.errors">
+        <strong *ngIf="data.errors['name']">{{data.errors['name']}}</strong>
+        <strong *ngIf="data.errors['email']">{{data.errors['email']}}</strong>
+        <strong *ngIf="data.errors['telefono']">{{data.errors['telefono']}}</strong>
+    </div>
     <form [formGroup]="editarUsuario">
         <mat-form-field appearance="outline">
             <mat-label>Código</mat-label>

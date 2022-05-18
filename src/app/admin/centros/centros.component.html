@@ -1,0 +1,52 @@
+<div class="backg">
+    <mat-card *ngIf="cargandoCentros">
+        <mat-card-content>
+            <div class="progressspin" *ngIf="cargandoCentros">
+                <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+            </div>
+            <!-- <app-tabla-centros *ngIf="centros.length>0" [centros]="centros" (updateUsuarios)="updateCentros()"></app-tabla-centros> -->
+        </mat-card-content>
+    </mat-card>
+    <mat-accordion *ngIf="!cargandoCentros">
+        <mat-expansion-panel *ngFor="let centro of centros" (opened)="getAdmins(centro)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{centro.nombre}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list>
+                <div mat-subheader>Información del centro</div>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>business</mat-icon>
+                    <div mat-line>{{centro.nombre_legal}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>gavel</mat-icon>
+                    <div mat-line>{{centro.nif}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>phone</mat-icon>
+                    <div mat-line>{{centro.telefono}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>place</mat-icon>
+                    <div mat-line>{{centro.direccion}}</div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <div mat-subheader>Administradores del centro <span class="spacer"></span> <button mat-icon-button (click)="addUserCentro(centro)"><mat-icon>person_add</mat-icon></button></div>
+                <div class="progressspin" *ngIf="cargandoAdmins">
+                    <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+                </div>
+                <div *ngIf="!cargandoAdmins">
+                    <mat-list-item *ngFor="let admin of admins">
+                        <mat-icon mat-list-icon>person</mat-icon>
+                        <div mat-line>{{admin.name}}</div>
+                        <div mat-line>{{admin.email}}</div>
+                        <button mat-icon-button (click)="deleteUserCentro(centro,admin)"><mat-icon>person_remove</mat-icon></button>
+                    </mat-list-item>
+                </div>
+            </mat-list>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <button mat-fab class="floatingButton" (click)="createCentro()"><mat-icon>add_business</mat-icon></button>
+</div>

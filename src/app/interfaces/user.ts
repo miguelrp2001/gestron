@@ -1,9 +1,3 @@
-// To parse this data:
-//
-//   import { Convert, GestronRequest } from "./file";
-//
-//   const gestronRequest = Convert.toGestronRequest(json);
-
 export interface GestronRequest {
   status: string;
   data: Data;
@@ -12,20 +6,34 @@ export interface GestronRequest {
 export interface Data {
   user?: User;
   mensaje?: string;
-  users: User[];
+  users?: User[];
+  centro?: Centro;
+  centros?: Centro[];
 }
 
 export interface User {
+  id?: number;
+  activo?: boolean;
   name: string;
+  admin?: boolean;
   email: string;
   telefono: string;
-  admin?: boolean;
-  activo?: boolean;
-  created_at?: Date;
-  updated_at?: Date;
-  id?: number;
   ipRegistro?: string;
   ipUltLogin?: string;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface Centro {
+  id?: number;
+  nombre: string;
+  nombre_legal: string;
+  nif: string;
+  telefono: string;
+  direccion: string;
+  administradores?: User[];
+  updated_at?: Date;
+  created_at?: Date;
 }
 
 // Converts JSON strings to/from your types

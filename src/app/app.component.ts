@@ -7,11 +7,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConnectionErrorComponent } from './shared/connection-error/connection-error.component';
 import { LoadingDialogComponent } from './shared/loading-dialog/loading-dialog.component';
-import { GestronRequest, User } from './interfaces/user';
+import { GestronRequest, User, Centro } from './interfaces/user';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -33,8 +34,9 @@ export class AppComponent {
       if (r) {
         this.sesionStatus = true;
         this.authService.profile().subscribe((res: GestronRequest) => {
-          dialogLoading.close();
           this.authService.setUsuario(res.data.user as User);
+          this.authService.setCentros(res.data.centros as Centro[]);
+          dialogLoading.close();
         }, error => {
           dialogLoading.close();
           if (error.ok == false && error.status == 0) {
@@ -58,6 +60,21 @@ export class AppComponent {
     })
   }
 
+  updCentro() {
+    this.authService.profile().subscribe((res: GestronRequest) => {
+      this.authService.setUsuario(res.data.user as User);
+      this.authService.setCentros(res.data.centros as Centro[]);
+    })
+  }
+
+  getCentroSeleccionado(): Centro {
+    return this.authService.getCentroSeleccionado();
+  }
+
+  setCentro(centro: Centro) {
+    this.authService.setCentroSeleccionado(centro);
+  }
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -75,6 +92,9 @@ export class AppComponent {
 
   public user(): User {
     return this.authService.getUsuario();
+  }
+  public centros(): Centro[] {
+    return this.authService.getCentros();
   }
 
   hideSideBar() {

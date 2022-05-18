@@ -7,6 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TablaUsuariosComponent } from './components/tabla-usuarios/tabla-usuarios.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CentrosComponent } from './centros/centros.component';
+import { TablaCentrosComponent } from './components/tabla-centros/tabla-centros.component';
+import { EditCentroComponent } from './components/edit-centro/edit-centro.component';
+import { AddUserCentroComponent } from './components/add-user-centro/add-user-centro.component';
 
 
 
@@ -14,7 +19,13 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
   declarations: [
     AdmindashComponent,
     TablaUsuariosComponent,
-    EditUserComponent
+    EditUserComponent,
+    DashboardComponent,
+    CentrosComponent,
+    TablaCentrosComponent,
+    EditCentroComponent,
+    AddUserCentroComponent,
+
   ],
   imports: [
     CommonModule,
