@@ -1,8 +1,8 @@
 <div>
     <div class="imgcontainer">
-        <img [src]="wallpaper.fullUrl" alt="">
+        <img [src]="wallpaper.fullUrl">
     </div>
-    <div class="text">
+    <div class="text" *ngIf="wallpaper.fullUrl">
         <h4>{{wallpaper.title}}</h4>
         <h5>{{wallpaper.copyright}}</h5>
     </div>

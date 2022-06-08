@@ -30,7 +30,7 @@ export class EditCentroComponent implements OnInit {
     direccion: [this.data.centro.direccion, [Validators.required, Validators.minLength(10), Validators.maxLength(160)]],
   })
 
-  mailErrorMessage(inputName: string, inputShow: string) {
+  errorMessage(inputName: string, inputShow: string) {
     let input = this.editarCentro.get(inputName) || null;
 
     if (input && input?.touched) {

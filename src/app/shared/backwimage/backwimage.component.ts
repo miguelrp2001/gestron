@@ -14,6 +14,7 @@ export class BackwimageComponent implements OnInit {
 
   image = this.wallpaper.fullUrl;
 
+
   ngOnInit(): void {
   }
 

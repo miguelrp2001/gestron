@@ -1,3 +1,7 @@
+.colorpick {
+    height: 1.2em;
+}
+
 form {
     display: flex;
     flex-direction: column;

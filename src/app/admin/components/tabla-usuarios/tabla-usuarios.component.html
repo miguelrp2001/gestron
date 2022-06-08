@@ -45,5 +45,4 @@
         <tr mat-header-row *matHeaderRowDef="(isHandset$ | async)? ['name', 'activo', 'acciones']:['id', 'name', 'activo', 'admin', 'email', 'telefono', 'acciones']"></tr>
         <tr mat-row *matRowDef="let row; columns: (isHandset$ | async)? ['name', 'activo', 'acciones']:['id', 'name', 'activo', 'admin', 'email', 'telefono', 'acciones'];"></tr>
     </table>
-
 </div>

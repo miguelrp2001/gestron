@@ -32,7 +32,7 @@ export class EditUserComponent implements OnInit {
     created_at: [this.data.user.created_at]
   })
 
-  mailErrorMessage(inputName: string, inputShow: string) {
+  errorMessage(inputName: string, inputShow: string) {
     let input = this.editarUsuario.get(inputName) || null;
 
     if (input && input?.touched) {

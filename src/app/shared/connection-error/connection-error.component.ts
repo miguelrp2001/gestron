@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DiagReceived } from 'src/app/admin/components/edit-centro/edit-centro.component';
 
 @Component({
   selector: 'app-connection-error',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectionErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialogRef<DiagReceived>) { }
+
+
+  reintentar() {
+    this.dialog.close();
+  }
 
   ngOnInit(): void {
   }

@@ -1,0 +1,12 @@
+.fondoTabla,
+table {
+    width: 100%;
+}
+
+.lineaColor {
+    width: 4px;
+    height: 2.7em;
+    float: left;
+    color: #ffffff00;
+    align-self: center;
+}

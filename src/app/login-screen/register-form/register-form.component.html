@@ -1,1 +1,53 @@
-<p>register-form works!</p>
+<form [formGroup]="registroUsuario">
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="name" [readonly]="false" matNativeControl type="text" placeholder="yo@dominio.com">
+        <mat-icon matPrefix>account_circle</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre de la empresa</mat-label>
+        <input formControlName="name" [readonly]="false" matNativeControl type="text" placeholder="yo@dominio.com">
+        <mat-icon matPrefix>store</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre legal</mat-label>
+        <input formControlName="name" [readonly]="false" matNativeControl type="text" placeholder="yo@dominio.com">
+        <mat-icon matPrefix>business</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input formControlName="email" [readonly]="false" matNativeControl type="email" placeholder="yo@dominio.com">
+        <mat-icon matPrefix>email</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('email','El correo no es válido') }}</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+        <input formControlName="telefono" [readonly]="false" matNativeControl type="phone" placeholder="666555444">
+        <mat-icon matPrefix>phone</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('telefono','El teléfono no es válido') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input formControlName="password" [readonly]="false" matNativeControl type="password" placeholder="">
+        <mat-icon matPrefix>password</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('password','La contraseña no es válida') }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Repetir contraseña</mat-label>
+        <input formControlName="password" [readonly]="false" matNativeControl type="password" placeholder="">
+        <mat-icon matPrefix>password</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('password','La contraseña no coincide') }}</mat-error>
+    </mat-form-field>
+
+    <button mat-stroked-button [mat-dialog-close]="registroUsuario.value">Solicitar cuenta</button>
+</form>

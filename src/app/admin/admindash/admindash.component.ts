@@ -10,15 +10,18 @@ import { GestronbackendService } from '../../services/gestronbackend.service';
 export class AdmindashComponent implements OnInit {
 
   usuarios: User[] = [];
+  actualizandoUsuarios: boolean = true;
 
   constructor(private gestronapi: GestronbackendService) {
     this.updateUsers();
   }
 
   updateUsers() {
+    this.actualizandoUsuarios = true;
     this.gestronapi.allUsers().subscribe((res: GestronRequest) => {
       if (res.data.users) {
         this.usuarios = res.data.users;
+        this.actualizandoUsuarios = false;
       }
     })
 

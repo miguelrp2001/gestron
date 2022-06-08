@@ -3,8 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
 import { GestronRequest, User, Centro } from '../interfaces/user';
+import { SecureStorageService } from './secure-storage.service';
 
-const APIURL = "http://127.0.0.1:8000/api/auth/";
+// const APIURL = "http://127.0.0.1:8000/api/auth/";
+const APIURL = "http://192.168.1.251:8000/api/auth/";
 
 
 @Injectable({
@@ -28,8 +30,6 @@ export class AuthService {
 
   public setCentros(centros: Centro[]) {
     this.centros = centros;
-    console.warn(this.centros.indexOf(this.centroSeleccionado));
-
     let chg = true;
 
     this.centros.forEach(centro => {
@@ -39,7 +39,7 @@ export class AuthService {
     });
 
     if (chg) {
-      this.centroSeleccionado = centros[0];
+      this.setCentroSeleccionado(centros[0]);
     }
   }
 
@@ -49,9 +49,16 @@ export class AuthService {
 
   public setCentroSeleccionado(centro: Centro) {
     this.centroSeleccionado = centro;
+    this.LocalEncryptedStorage.set('centroSelecccionado', this.centroSeleccionado)
   }
 
-  constructor(private http: HttpClient, private token: TokenService) { }
+  constructor(private http: HttpClient, private token: TokenService, private LocalEncryptedStorage: SecureStorageService) {
+
+    if (this.LocalEncryptedStorage.get('centroSelecccionado')) {
+      this.centroSeleccionado = this.LocalEncryptedStorage.get('centroSelecccionado');
+    }
+
+  }
 
   login(user: User): Observable<GestronRequest> {
     return this.http.post<GestronRequest>(APIURL + 'login', user);
@@ -65,7 +72,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.usuario.admin || false;
+    return this.usuario.admin || true;
   }
 
   logout(): Observable<GestronRequest> {

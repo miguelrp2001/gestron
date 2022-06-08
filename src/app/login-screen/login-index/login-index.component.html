@@ -1,10 +1,11 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <app-backwimage [wallpaper]="fondo">
     <div class="back">
-        <mat-card class="loginbui">
-            <form [formGroup]="formularioLogin" (ngSubmit)="login()">
+        <img src="../../../assets/logos/logo.png" class="logo">
+        <form [formGroup]="formularioLogin" (ngSubmit)="login()">
+            <mat-card>
                 <mat-card-title>Iniciar sesión</mat-card-title>
-                <mat-card-content class="login-card formularioLogin">
+                <mat-card-content class="formularioLogin">
                     <mat-form-field appearance="outline">
                         <mat-label>Correo</mat-label>
                         <input formControlName="email" matInput type="email" placeholder="yo@dominio.com">
@@ -17,17 +18,15 @@
                         <mat-icon matPrefix>key</mat-icon>
                         <mat-error>{{ mailErrorMessage('password','La contraseña debe tener al menos 6 caracteres') }}</mat-error>
                     </mat-form-field>
-                    <mat-slide-toggle *ngIf="false"> Mantener la sesión iniciada
-                    </mat-slide-toggle>
                 </mat-card-content>
-                <mat-card-actions style="display: flex; flex-direction: column; justify-content: center; gap: .2em; text-align: center;">
+                <mat-card-actions>
                     <button type="submit" mat-stroked-button color="primary">Iniciar sesión
                       <mat-progress-bar *ngIf="iniciandoSesion" mode="indeterminate" class="pBarButton"></mat-progress-bar>
                   </button>
                     <span style="display: block; ">o</span>
                     <a (click)="registro()" mat-button color="accent">Solicite una cuenta</a>
                 </mat-card-actions>
-            </form>
-        </mat-card>
+            </mat-card>
+        </form>
     </div>
 </app-backwimage>

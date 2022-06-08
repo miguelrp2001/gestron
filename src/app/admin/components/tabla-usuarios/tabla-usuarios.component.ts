@@ -6,6 +6,7 @@ import { EditUserComponent, Errors } from '../edit-user/edit-user.component';
 import { Observable, map, shareReplay } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class TablaUsuariosComponent implements OnInit {
 
   @Output() updateUsuarios = new EventEmitter<string>();
 
-  constructor(private breakpointObserver: BreakpointObserver, private apibackend: GestronbackendService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private breakpointObserver: BreakpointObserver, private apibackend: GestronbackendService, public dialog: MatDialog, private snackBar: MatSnackBar, private authSer: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +33,7 @@ export class TablaUsuariosComponent implements OnInit {
       slider.disabled = false;
       let snackBarRef = this.snackBar.open("El usuario ahora está " + (slider.checked ? "activado." : "desactivado."), '', { duration: 5000 });
     }, (err) => {
-      let snackBarRef = this.snackBar.open("No se ha podido cambiar el estado.", '', { duration: 5000 });
+      let snackBarRef = this.snackBar.open(err.error.data.mensaje, '', { duration: 5000 });
       slider.checked = !slider.checked;
       slider.disabled = false;
     })
@@ -54,6 +55,9 @@ export class TablaUsuariosComponent implements OnInit {
       if (result) {
         this.apibackend.updateUser(result).subscribe((res: GestronRequest) => {
           this.updateUsuarios.emit('upd');
+          if (result.id == this.authSer.getUsuario().id) {
+            this.authSer.setUsuario(res.data.user || {} as User);
+          }
           let snackBarRef = this.snackBar.open("Usuario actualizado con éxito.", '', { duration: 5000 });
         }, (error) => {
           console.log(error.error.errors);

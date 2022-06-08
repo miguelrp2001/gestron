@@ -17,21 +17,21 @@
             <mat-label>Correo</mat-label>
             <input formControlName="email" [readonly]="false" matNativeControl type="email" placeholder="yo@dominio.com">
             <mat-icon matPrefix>email</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('email','El correo no es válido') }}</mat-error>
+            <mat-error color="red">{{ errorMessage('email','El correo no es válido') }}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Nombre</mat-label>
-            <input formControlName="name" [readonly]="false" matNativeControl type="email" placeholder="yo@dominio.com">
+            <input formControlName="name" [readonly]="false" matNativeControl type="text" placeholder="yo@dominio.com">
             <mat-icon matPrefix>account_circle</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
+            <mat-error color="red">{{ errorMessage('name','El nombre no es válido') }}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Teléfono</mat-label>
             <input formControlName="telefono" [readonly]="false" matNativeControl type="phone" placeholder="666555444">
             <mat-icon matPrefix>phone</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('telefono','El teléfono no es válido') }}</mat-error>
+            <mat-error color="red">{{ errorMessage('telefono','El teléfono no es válido') }}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">

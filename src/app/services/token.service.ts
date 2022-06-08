@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
   private issuer = {
-    login: 'http://127.0.0.1:8000/api/auth/login',
+    // login: 'http://127.0.0.1:8000/api/auth/login',
+    login: 'http://192.168.1.251:8000/api/auth/login',
     // register: 'http://127.0.0.1:8000/api/auth/register',
   };
 
@@ -14,7 +15,6 @@ export class TokenService {
 
   handleData(token: any) {
     localStorage.setItem('auth_token', token);
-    console.log(token);
   }
   getToken() {
     return localStorage.getItem('auth_token');
@@ -38,5 +38,6 @@ export class TokenService {
   // Remove token
   removeToken() {
     localStorage.removeItem('auth_token');
+    localStorage.clear();
   }
 }

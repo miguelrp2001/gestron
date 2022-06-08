@@ -5,6 +5,7 @@ import { ConnectionErrorComponent } from './connection-error/connection-error.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -17,7 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [
     CommonModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MaterialModule
   ],
   exports: [
     BackwimageComponent

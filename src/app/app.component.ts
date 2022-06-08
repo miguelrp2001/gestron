@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TokenService } from './services/token.service';
 import { AuthStateService } from './services/auth-state.service';
 import { AuthService } from './services/auth.service';
@@ -12,7 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
-import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -22,10 +22,15 @@ import { FormControl } from '@angular/forms';
 export class AppComponent {
   title = 'gestron';
   sesionStatus = false;
+  allLoaded = false;
 
   @ViewChild('menuLateral') menuLateral: MatSidenav | undefined;
 
   constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) {
+    this.loadApp();
+  }
+
+  loadApp() {
     let dialogLoading = this.dialog.open(LoadingDialogComponent, {
       disableClose: true,
     });
@@ -37,6 +42,8 @@ export class AppComponent {
           this.authService.setUsuario(res.data.user as User);
           this.authService.setCentros(res.data.centros as Centro[]);
           dialogLoading.close();
+          this.allLoaded = true;
+          let snackBarRef = this.snackBar.open('Bienvenido de nuevo ' + this.authService.getUsuario().name + '.', '', { duration: 5000 });
         }, error => {
           dialogLoading.close();
           if (error.ok == false && error.status == 0) {
@@ -44,21 +51,27 @@ export class AppComponent {
             let dialogRef = this.dialog.open(ConnectionErrorComponent, {
               disableClose: true,
             });
+            dialogRef.afterClosed().subscribe(r => {
+              this.loadApp();
+            })
           }
           if (error.status == 401) {
             this.authState.setAuthState(false);
             this.token.removeToken();
             let snackBarRef = this.snackBar.open('La sesión ha expirado.', '', { duration: 5000 });
+            this.allLoaded = true;
             this.router.navigate(['login'])
           }
 
         })
       } else {
         dialogLoading.close();
+        this.allLoaded = true;
         this.sesionStatus = false;
       }
     })
   }
+
 
   updCentro() {
     this.authService.profile().subscribe((res: GestronRequest) => {
@@ -73,6 +86,13 @@ export class AppComponent {
 
   setCentro(centro: Centro) {
     this.authService.setCentroSeleccionado(centro);
+    if (!this.router.url.includes('admin')) {
+      this.allLoaded = false;
+      let snackBarRef = this.snackBar.open('Se ha cambiado el centro a ' + centro.nombre + '.', '', { duration: 5000 });
+      setTimeout(() => {
+        this.allLoaded = true;
+      }, 10);
+    }
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

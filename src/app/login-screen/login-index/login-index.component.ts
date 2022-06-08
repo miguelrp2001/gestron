@@ -22,8 +22,8 @@ import { GestronRequest } from '../../interfaces/user';
 })
 export class LoginIndexComponent implements OnInit {
 
-  posfondo = Math.floor(Math.random() * (6));
 
+  posfondo = Math.floor(Math.random() * (6));
   constructor(private fb: FormBuilder, private wallService: LoginwallapiService, private dialog: MatDialog, private authService: AuthService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) {
     wallService.getWallpaper().subscribe((resp: Wallpaper[]) => {
       this.fondo = resp[this.posfondo];

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 export interface tab {
   'name': string;
@@ -35,10 +36,14 @@ export class DashboardComponent implements OnInit {
     this.rlaSafe = true;
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.activeLinkIndex = 0;
+    if (this.router.url.includes('centros')) {
+      this.activeLinkIndex = 1;
+    } else {
+      this.activeLinkIndex = 0;
+    }
   }
 
 }

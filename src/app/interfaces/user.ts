@@ -9,6 +9,8 @@ export interface Data {
   users?: User[];
   centro?: Centro;
   centros?: Centro[];
+  familia?: Familia;
+  familias?: Familia[];
   articulo?: Articulo;
   articulos?: Articulo[];
 }
@@ -32,10 +34,10 @@ export interface Articulo {
   nombre: string;
   nombre_corto: string;
   color: string;
-  familia_id: number;
+  familia_id?: number;
+  familia?: number;
   created_at?: null;
   updated_at?: null;
-  laravel_through_key?: number;
 }
 
 export interface Centro {
@@ -48,6 +50,15 @@ export interface Centro {
   administradores?: User[];
   updated_at?: Date;
   created_at?: Date;
+}
+
+export interface Familia {
+  id: number;
+  nombre: string;
+  centro?: number | Centro;
+  centro_id?: number | Centro;
+  created_at?: null;
+  updated_at?: null;
 }
 
 // Converts JSON strings to/from your types

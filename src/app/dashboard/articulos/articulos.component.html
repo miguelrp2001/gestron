@@ -1,1 +1,12 @@
-<strong *ngFor="let articulo of articulos" style="display: block;">{{articulo.nombre}}</strong>
+<div class="backg">
+    <mat-card>
+        <mat-card-content>
+            <div class="progressspin" *ngIf="actualizandoArticulos()">
+                <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+            </div>
+            <app-tabla-articulos *ngIf="!actualizandoArticulos()" [articulos]="articulos" [familias]="familias" (actualizarArticulos)="actualizarArticulos()">
+            </app-tabla-articulos>
+        </mat-card-content>
+    </mat-card>
+    <button mat-fab class="floatingButton" (click)="createArticulo()" matTooltip="Crear artículo" matTooltipPosition="left" matTooltipHideDelay="1000" title="Crear artículo"><mat-icon>add</mat-icon></button>
+</div>

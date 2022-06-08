@@ -9,48 +9,50 @@
         <strong *ngIf="data.errors['direccion']">{{data.errors['direccion']}}</strong>
     </div>
     <form [formGroup]="editarCentro">
-        <mat-form-field appearance="outline" *ngIf="!this.data.create">
-            <mat-label>Código</mat-label>
-            <input formControlName="id" [readonly]="true" matNativeControl type="number" placeholder="Generado automáticamente">
-            <mat-icon matPrefix>badge</mat-icon>
-            <mat-error color="red"></mat-error>
-        </mat-form-field>
+        <div class="aligned">
+            <mat-form-field appearance="outline" *ngIf="!this.data.create">
+                <mat-label>Código</mat-label>
+                <input formControlName="id" [readonly]="true" matNativeControl type="number" placeholder="Generado automáticamente">
+                <mat-icon matPrefix>badge</mat-icon>
+                <mat-error color="red"></mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <input formControlName="nombre" cdkFocusInitial [readonly]="false" matNativeControl type="text">
-            <mat-icon matPrefix>store</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('nombre','El nombre no es válido') }}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="nombre" cdkFocusInitial [readonly]="false" matNativeControl type="text">
+                <mat-icon matPrefix>store</mat-icon>
+                <mat-error color="red">{{ errorMessage('nombre','El nombre no es válido') }}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre Legal</mat-label>
-            <input formControlName="nombre_legal" [readonly]="false" matNativeControl type="text">
-            <mat-icon matPrefix>business</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('nombre_legal','El nombre legal no es válido') }}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre Legal</mat-label>
+                <input formControlName="nombre_legal" [readonly]="false" matNativeControl type="text">
+                <mat-icon matPrefix>business</mat-icon>
+                <mat-error color="red">{{ errorMessage('nombre_legal','El nombre legal no es válido') }}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Teléfono</mat-label>
-            <input formControlName="telefono" [readonly]="false" matNativeControl type="phone" placeholder="666555444">
-            <mat-icon matPrefix>phone</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('telefono','El teléfono no es válido') }}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input formControlName="telefono" [readonly]="false" matNativeControl type="phone" placeholder="666555444">
+                <mat-icon matPrefix>phone</mat-icon>
+                <mat-error color="red">{{ errorMessage('telefono','El teléfono no es válido') }}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>NIF</mat-label>
-            <input formControlName="nif" [readonly]="false" matNativeControl type="text" placeholder="B11223344">
-            <mat-icon matPrefix>gavel</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('nif','El nif no es válido') }}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>NIF</mat-label>
+                <input formControlName="nif" [readonly]="false" matNativeControl type="text" placeholder="B11223344">
+                <mat-icon matPrefix>gavel</mat-icon>
+                <mat-error color="red">{{ errorMessage('nif','El nif no es válido') }}</mat-error>
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Dirección</mat-label>
-            <input formControlName="direccion" [readonly]="false" matNativeControl type="text" placeholder="Calle de Prueba, 10, Málaga, España">
-            <mat-icon matPrefix>place</mat-icon>
-            <mat-error color="red">{{ mailErrorMessage('direccion','El teléfono no es válido') }}</mat-error>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Dirección</mat-label>
+                <input formControlName="direccion" [readonly]="false" matNativeControl type="text" placeholder="Calle de Prueba, 10, Málaga, España">
+                <mat-icon matPrefix>place</mat-icon>
+                <mat-error color="red">{{ errorMessage('direccion','El teléfono no es válido') }}</mat-error>
+            </mat-form-field>
 
+        </div>
         <button mat-stroked-button (click)="guardar()">Listo</button>
     </form>
 
