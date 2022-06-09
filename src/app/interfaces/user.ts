@@ -57,6 +57,7 @@ export interface Familia {
   nombre: string;
   centro?: number | Centro;
   centro_id?: number | Centro;
+  articulos?: Articulo[];
   created_at?: null;
   updated_at?: null;
 }

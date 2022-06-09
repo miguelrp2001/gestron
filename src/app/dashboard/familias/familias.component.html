@@ -1,1 +1,12 @@
-<p>familias works!</p>
+<div class="backg">
+    <mat-card *ngIf="actualizandoFamilias()">
+        <mat-card-content>
+            <div class="progressspin">
+                <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <app-tabla-familias *ngIf="!actualizandoFamilias()" [familias]="familias" [cabecerasFamilia]="cabecerasFamilia" (actualizarFamilias)="actualizarFamilias()">
+    </app-tabla-familias>
+    <button mat-fab class="floatingButton" (click)="crearFamilia()" matTooltip="Crear familia" matTooltipPosition="left" matTooltipHideDelay="1000" title="Crear familia"><mat-icon>add</mat-icon></button>
+</div>
