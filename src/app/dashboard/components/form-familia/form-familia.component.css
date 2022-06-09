@@ -1,0 +1,37 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    justify-content: center;
+    align-items: center;
+}
+
+.aligned {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: .5em;
+    justify-content: center;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+div.errors {
+    background-color: #9d2a37;
+    padding: 1em;
+    border-radius: 5px;
+    margin: .3em;
+    margin-bottom: 1em;
+}
+
+div.errors strong {
+    display: block;
+}
+
+@media screen and (max-width:575px) {
+    mat-form-field {
+        width: 100%;
+    }
+}

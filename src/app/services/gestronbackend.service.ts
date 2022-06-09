@@ -88,6 +88,11 @@ export class GestronbackendService {
   public updateArticulo(articulo: Articulo): Observable<GestronRequest> {
     return this.http.put<GestronRequest>(BACKEND + 'articulos/' + articulo.id + '/edit', articulo);
   }
+
+  public updateFamiliaArticulo(articulo: string, familia: number): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'articulos/' + articulo + '/editFamilia', { familia: familia });
+  }
+
   public crearArticulo(articulo: Articulo): Observable<GestronRequest> {
     return this.http.post<GestronRequest>(BACKEND + 'articulos/create', articulo);
   }
@@ -111,7 +116,11 @@ export class GestronbackendService {
     return this.http.put<GestronRequest>(BACKEND + 'familias/' + familia.id + '/edit', familia);
   }
 
+  public destroyFamilia(familia: Familia): Observable<GestronRequest> {
+    return this.http.delete<GestronRequest>(BACKEND + 'familias/' + familia.id);
+  }
+
   public crearFamilia(familia: Familia): Observable<GestronRequest> {
-    return this.http.post<GestronRequest>(BACKEND + 'familias/create', familia);
+    return this.http.post<GestronRequest>(BACKEND + 'familias/create', { nombre: familia.nombre, centro: this.authService.getCentroSeleccionado().id });
   }
 }

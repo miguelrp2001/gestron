@@ -1,0 +1,126 @@
+.cardgroup {
+    display: flex;
+    gap: 1em;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+mat-card {
+    width: 26em;
+    max-width: 100%;
+}
+
+.lineaColor {
+    width: 4px;
+    height: 2.7em;
+    float: left;
+    color: #ffffff00;
+    align-self: center;
+    border-radius: 25px;
+}
+
+mat-card-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: space-around;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+mat-card-actions>button {
+    width: 50%;
+}
+
+.espacio {
+    height: 100%;
+}
+
+.articuloDrop {
+    padding: 1em .2em;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+}
+
+.spacbetw {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+.articuloDrop mat-icon {
+    justify-self: flex-end;
+    opacity: .5;
+}
+
+.spacer {
+    display: inline-block;
+}
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    padding: 1em .4em;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+}
+
+.cdk-drag-placeholder {
+    opacity: 1;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-custom-placeholder {
+    background: #ccc;
+    min-height: 65px;
+    padding: 1px;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    color: black;
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+mat-card-content {
+    margin-top: 2em;
+    border: solid 1px #ccc;
+    min-height: 35px;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+    background: white;
+}
+
+mat-card-content.cdk-drop-list-dragging .articuloDrop:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media screen and (max-width:599px) {
+    .cardgroup>mat-card {
+        width: 100%;
+        min-height: 10em;
+    }
+}

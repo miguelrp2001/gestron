@@ -5,7 +5,7 @@ import { Articulo, Familia } from '../../../interfaces/user';
 
 
 export interface DiagReceived { articulo: Articulo; familias: Familia[]; create: boolean; errors?: { [key: string]: Errors }; };
-export interface Errors { name?: string[], email?: string[], telefono?: string[] };
+export interface Errors { nombre?: string[], email?: string[], telefono?: string[] };
 
 @Component({
   selector: 'app-form-articulo',
