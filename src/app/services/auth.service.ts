@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
 import { GestronRequest, User, Centro } from '../interfaces/user';
 import { SecureStorageService } from './secure-storage.service';
+import { BACKEND } from './gestronbackend.service';
 
 // const APIURL = "http://127.0.0.1:8000/api/auth/";
-const APIURL = "http://192.168.1.251:8000/api/auth/";
+export const AUTHURL = BACKEND + "auth/";
 
 
 @Injectable({
@@ -61,14 +62,14 @@ export class AuthService {
   }
 
   login(user: User): Observable<GestronRequest> {
-    return this.http.post<GestronRequest>(APIURL + 'login', user);
+    return this.http.post<GestronRequest>(AUTHURL + 'login', user);
   }
 
   profile(): Observable<GestronRequest> {
     const headers: HttpHeaders = new HttpHeaders({
       Authorization: 'Bearer ' + this.token.getToken
     })
-    return this.http.get<GestronRequest>(APIURL + 'user-profile');
+    return this.http.get<GestronRequest>(AUTHURL + 'user-profile');
   }
 
   isAdmin(): boolean {
@@ -76,6 +77,6 @@ export class AuthService {
   }
 
   logout(): Observable<GestronRequest> {
-    return this.http.post<GestronRequest>(APIURL + 'logout', {});
+    return this.http.post<GestronRequest>(AUTHURL + 'logout', {});
   }
 }

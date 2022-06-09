@@ -5,10 +5,9 @@ import { catchError, Observable } from 'rxjs';
 import { AuthStateService } from './auth-state.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// const BACKENDNOAPI = "http://127.0.0.1:8000/";
-// const BACKENDIP = "127.0.0.1";
-const BACKENDNOAPI = "http://192.168.1.251:8000/";
-const BACKENDIP = "192.168.1.251";
+import { APIIP, APIURL } from './config.constants';
+
+const BACKENDIP = APIIP;
 @Injectable()
 
 export class AuthInterceptor implements HttpInterceptor {

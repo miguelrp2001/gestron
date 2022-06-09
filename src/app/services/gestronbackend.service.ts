@@ -3,10 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, GestronRequest, Centro, Articulo, Familia } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { APIURL } from './config.constants';
 
-// const BACKENDNOAPI = "http://127.0.0.1:8000/";
-const BACKENDNOAPI = "http://192.168.1.251:8000/";
-const BACKEND = BACKENDNOAPI + "api/";
+export const BACKEND = APIURL + "/api/";
 
 @Injectable({
   providedIn: 'root'

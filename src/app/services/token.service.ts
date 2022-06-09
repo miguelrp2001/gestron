@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
+import { AUTHURL } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-
-  private issuer = {
-    // login: 'http://127.0.0.1:8000/api/auth/login',
-    login: 'http://192.168.1.251:8000/api/auth/login',
-    // register: 'http://127.0.0.1:8000/api/auth/register',
-  };
 
   constructor() { }
 
