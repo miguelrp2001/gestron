@@ -4,7 +4,7 @@
         <mat-card-title>{{familia.nombre}}</mat-card-title>
 
         <mat-card-content cdkDropList cdkDropListSortingDisabled #familias="cdkDropList" [cdkDropListData]="familia" class="droplist" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let articulo of familia.articulos" cdkDrag class="articuloDrop" [id]="articulo.id">
+            <div *ngFor="let articulo of familia.articulos" cdkDrag class="articuloDrop" [id]="articulo.id" title="{{articulo.nombre}}">
                 <div class="example-custom-placeholder spacbetw" *cdkDragPlaceholder>
                     <div class="lineaColor" style="background-color: {{articulo.color}};"></div>
                     <span>{{articulo.nombre}}</span>
@@ -13,8 +13,7 @@
                     <div class="lineaColor" style="background-color: {{articulo.color}};"></div>
                     <span>{{articulo.nombre}}</span>
                 </div>
-
-                <mat-icon>drag_handle</mat-icon>
+                <mat-icon cdkDragHandle>drag_handle</mat-icon>
             </div>
 
         </mat-card-content>

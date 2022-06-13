@@ -21,7 +21,6 @@ export class TablaFamiliasComponent implements OnInit {
   constructor(private dialog: MatDialog, private gestronapi: GestronbackendService, private snackBar: MatSnackBar) { }
 
   drop(event: CdkDragDrop<Articulo[]> | CdkDragDrop<any>) {
-
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.articulos, event.previousIndex, event.currentIndex);
     } else {
@@ -31,7 +30,7 @@ export class TablaFamiliasComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      let snackBarRef = this.snackBar.open("Moviendo " + (event.item.element.nativeElement.innerText) + " desde " + event.previousContainer.data.nombre + " a " + event.container.data.nombre, '', { duration: 1500 });
+      let snackBarRef = this.snackBar.open("Moviendo " + (event.item.element.nativeElement.getAttribute("title")) + " desde " + event.previousContainer.data.nombre + " a " + event.container.data.nombre, '', { duration: 1500 });
       this.changeFamilyOfArticle(event.item.element.nativeElement.id, event.container.data.id)
     }
   }

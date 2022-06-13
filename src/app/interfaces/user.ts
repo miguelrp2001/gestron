@@ -52,6 +52,31 @@ export interface Centro {
   created_at?: Date;
 }
 
+export interface Tarifa {
+  id?: number;
+  nombre: string;
+  precios: Precio[];
+  updated_at?: Date;
+  created_at?: Date;
+}
+
+export interface Precio {
+  id?: number;
+  precio: number;
+  impuesto: Impuesto;
+  articulo_id: number;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface Impuesto {
+  id?: number;
+  nombre: string;
+  nombre_corto: string;
+  porcentaje: number;
+  created_at?: Date;
+  updated_at?: Date;
+}
 export interface Familia {
   id: number;
   nombre: string;

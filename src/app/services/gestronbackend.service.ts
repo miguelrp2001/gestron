@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, GestronRequest, Centro, Articulo, Familia } from '../interfaces/user';
+import { User, GestronRequest, Centro, Articulo, Familia, Tarifa } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { APIURL } from './config.constants';
@@ -122,4 +122,32 @@ export class GestronbackendService {
   public crearFamilia(familia: Familia): Observable<GestronRequest> {
     return this.http.post<GestronRequest>(BACKEND + 'familias/create', { nombre: familia.nombre, centro: this.authService.getCentroSeleccionado().id });
   }
+
+
+  // Gestión de tarifas
+
+  public obtenerTarifas(): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'tarifas/' + this.authService.getCentroSeleccionado().id + '/list');
+  }
+
+  public chgStatusTarifa(id: number, estado?: boolean): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'tarifas/' + id + '/status', { estado: estado });
+  }
+
+  public updateTarifa(tarifa: Tarifa): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id + '/edit', tarifa);
+  }
+
+  public crearTarifa(tarifa: Tarifa): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'tarifas/create', tarifa);
+  }
+
+  public obtenerTarifa(id: number): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'tarifas/' + id);
+  }
+
+  public destroyTarifa(tarifa: Tarifa): Observable<GestronRequest> {
+    return this.http.delete<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id);
+  }
+
 }

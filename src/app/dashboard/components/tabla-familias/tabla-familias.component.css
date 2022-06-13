@@ -47,9 +47,12 @@ mat-card-actions>button {
     justify-content: space-between;
     gap: 1em;
     box-sizing: border-box;
-    cursor: move;
     background: white;
     font-size: 14px;
+}
+
+.articuloDrop mat-icon {
+    cursor: move;
 }
 
 .spacbetw {
@@ -81,7 +84,6 @@ mat-card-actions>button {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    cursor: move;
     background: white;
     font-size: 14px;
 }
@@ -107,11 +109,31 @@ mat-card-actions>button {
 mat-card-content {
     margin-top: 2em;
     border: solid 1px #ccc;
-    min-height: 35px;
+    min-height: 267.2px;
+    max-height: 267.2px;
     border-radius: 4px;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hide;
     display: block;
     background: white;
+}
+
+mat-card-content::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+}
+
+mat-card-content::-webkit-scrollbar-track {
+    background: white;
+}
+
+mat-card-content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #888;
+}
+
+mat-card-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 mat-card-content.cdk-drop-list-dragging .articuloDrop:not(.cdk-drag-placeholder) {

@@ -11,6 +11,12 @@ import { RouterModule } from '@angular/router';
 import { FamiliasComponent } from './familias/familias.component';
 import { TablaFamiliasComponent } from './components/tabla-familias/tabla-familias.component';
 import { FormFamiliaComponent } from './components/form-familia/form-familia.component';
+import { TarifasComponent } from './tarifas/tarifas.component';
+import { TablaTarifasComponent } from './components/tabla-tarifas/tabla-tarifas.component';
+import { FormTarifaComponent } from './components/form-tarifa/form-tarifa.component';
+import { FormPerfilComponent } from './components/form-perfil/form-perfil.component';
+import { TablaPerfilesComponent } from './components/tabla-perfiles/tabla-perfiles.component';
+import { PerfilesComponent } from './perfiles/perfiles.component';
 
 
 
@@ -23,6 +29,12 @@ import { FormFamiliaComponent } from './components/form-familia/form-familia.com
     FamiliasComponent,
     TablaFamiliasComponent,
     FormFamiliaComponent,
+    TarifasComponent,
+    TablaTarifasComponent,
+    FormTarifaComponent,
+    FormPerfilComponent,
+    TablaPerfilesComponent,
+    PerfilesComponent,
   ],
   imports: [
     CommonModule,
