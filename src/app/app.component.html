@@ -1,80 +1,100 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #menuLateral class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false && sesionIniciada()">
-        <mat-toolbar *ngIf="sesionIniciada()">Menú</mat-toolbar>
-        <mat-nav-list *ngIf="sesionIniciada()">
-            <mat-list-item [routerLink]="['/']" routerLinkActive="active" (click)="hideSideBar()">
-                <mat-icon>dashboard</mat-icon> <span class="spacel"></span> Dashboard
-            </mat-list-item>
-            <mat-list-item [routerLink]="['/articulos']" routerLinkActive="active" (click)="hideSideBar()">
-                <mat-icon>category</mat-icon> <span class="spacel"></span> Gestión de artículos</mat-list-item>
-            <mat-list-item [routerLink]="['/familias']" routerLinkActive="active" (click)="hideSideBar()">
-                <mat-icon>mediation</mat-icon> <span class="spacel"></span> Gestión de familias</mat-list-item>
-            <mat-list-item [routerLink]="['/tarifas']" routerLinkActive="active" (click)="hideSideBar()">
-                <mat-icon>local_offer</mat-icon> <span class="spacel"></span> Gestión de tarifas</mat-list-item>
-            <mat-list-item [routerLink]="['/perfiles']" routerLinkActive="active" (click)="hideSideBar()">
-                <mat-icon>manage_accounts</mat-icon> <span class="spacel"></span> Gestión de perfiles</mat-list-item>
-            <!-- <a mat-list-item [routerLink]="['/']" routerLinkActive="router-link-active">
-                <mat-icon>dashboard</mat-icon> <span class="spacel"></span> Gestión de familias</a> -->
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar color="primary" *ngIf="sesionIniciada()">
-            <button *ngIf="sesionIniciada() && (isHandset$ | async)" (click)="menuLateral.toggle()" mat-icon-button><mat-icon>menu</mat-icon></button>
-            <span [routerLink]="['/']" routerLinkActive="router-link-active">Gestrón</span>
-            <span class="example-spacer"></span>
+  <mat-sidenav #menuLateral class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false && sesionIniciada()">
+    <mat-toolbar *ngIf="sesionIniciada()">Menú</mat-toolbar>
+    <mat-nav-list *ngIf="sesionIniciada()">
+      <a mat-list-item [routerLink]="['/dashboard']" [routerLinkActive]="['active']" (click)="hideSideBar()">
+        <mat-icon>dashboard</mat-icon> <span class="spacel"></span> Dashboard
+      </a>
+      <a mat-list-item [routerLink]="['/articulos']" [routerLinkActive]="['active']" (click)="hideSideBar()">
+        <mat-icon>category</mat-icon> <span class="spacel"></span> Gestión de artículos
+      </a>
+      <a mat-list-item [routerLink]="['/familias']" [routerLinkActive]="['active']" (click)="hideSideBar()">
+        <mat-icon>mediation</mat-icon> <span class="spacel"></span> Gestión de familias
+      </a>
+      <a mat-list-item [routerLink]="['/tarifas']" [routerLinkActive]="['active']" (click)="hideSideBar()">
+        <mat-icon>local_offer</mat-icon> <span class="spacel"></span> Gestión de tarifas
+      </a>
+      <a mat-list-item [routerLink]="['/perfiles']" [routerLinkActive]="['active']" (click)="hideSideBar()">
+        <mat-icon>manage_accounts</mat-icon> <span class="spacel"></span> Gestión de perfiles
+      </a>
+      <a mat-list-item [routerLink]="['/clientes']" [routerLinkActive]="['active']" (click)="hideSideBar()">
+        <mat-icon>contacts</mat-icon> <span class="spacel"></span> Gestión de clientes
+      </a>
+      <a mat-list-item [routerLink]="['/pos']" [routerLinkActive]="['active']" (click)="hideSideBar()">
+        <mat-icon>point_of_sale</mat-icon> <span class="spacel"></span> Gestión de puntos de venta
+      </a>
 
-            <button *ngIf="!sesionIniciada()" [routerLink]="['/login']" routerLinkActive="router-link-active" mat-stroked-button color="accent" aria-label="Botón iniciar sesión.">
-              <mat-icon>person</mat-icon>
-              Iniciar sesión
-            </button>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" *ngIf="sesionIniciada()">
+      <button *ngIf="sesionIniciada() && (isHandset$ | async)" (click)="menuLateral.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span [routerLink]="['/']" routerLinkActive="router-link-active">Gestrón</span>
+      <span class="example-spacer"></span>
+
+      <button *ngIf="!sesionIniciada()" [routerLink]="['/login']" routerLinkActive="router-link-active"
+        mat-stroked-button color="accent" aria-label="Botón iniciar sesión.">
+        <mat-icon>person</mat-icon>
+        Iniciar sesión
+      </button>
 
 
-            <button *ngIf="sesionIniciada() && centros().length>0" mat-stroked-button color="accent" [matMenuTriggerFor]="selectorCentro" (click)="updCentro()" matTooltip="Cambiar de centro" matTooltipPosition="below" matTooltipHideDelay="100" title="Cambiar de centro">
-              <mat-icon>business</mat-icon>
-              {{getCentroSeleccionado().nombre}}
-            </button>
+      <button *ngIf="sesionIniciada() && centros().length>0" mat-stroked-button color="accent"
+        [matMenuTriggerFor]="selectorCentro" (click)="updCentro()" matTooltip="Cambiar de centro"
+        matTooltipPosition="below" matTooltipHideDelay="100" title="Cambiar de centro">
+        <mat-icon>business</mat-icon>
+        {{getCentroSeleccionado().nombre}}
+      </button>
 
 
-            <mat-menu #selectorCentro="matMenu">
-                <button mat-menu-item *ngFor="let centro of centros()" aria-label="centro.nombre" (click)="setCentro(centro)" title="Cambiar a {{centro.nombre}} ({{centro.nombre_legal}})">
-                <mat-icon>business</mat-icon>
-                {{centro.nombre}} ({{centro.nombre_legal}})
-              </button>
-            </mat-menu>
+      <mat-menu #selectorCentro="matMenu">
+        <button mat-menu-item *ngFor="let centro of centros()" aria-label="centro.nombre" (click)="setCentro(centro)"
+          title="Cambiar a {{centro.nombre}} ({{centro.nombre_legal}})">
+          <mat-icon>business</mat-icon>
+          {{centro.nombre}} ({{centro.nombre_legal}})
+        </button>
+      </mat-menu>
 
-            <span class="space2"></span>
+      <span class="space2"></span>
 
-            <button *ngIf="sesionIniciada() && user().name && !(isHandset$ | async)" mat-stroked-button color="accent" aria-label="Menú de usuario." [matMenuTriggerFor]="menuUsuario" matTooltip="Menú de usuario" matTooltipPosition="below" matTooltipHideDelay="100"
-                title="Menú de usuario">
-              <mat-icon>person</mat-icon>
-              {{user().name}}
-            </button>
-            <button *ngIf="sesionIniciada() && user().name && (isHandset$ | async)" mat-icon-button color="accent" aria-label="Menú de usuario." [matMenuTriggerFor]="menuUsuario">
-              <mat-icon>person</mat-icon>
-            </button>
+      <button *ngIf="sesionIniciada() && user().name && !(isHandset$ | async)" mat-stroked-button color="accent"
+        aria-label="Menú de usuario." [matMenuTriggerFor]="menuUsuario" matTooltip="Menú de usuario"
+        matTooltipPosition="below" matTooltipHideDelay="100" title="Menú de usuario">
+        <mat-icon>person</mat-icon>
+        {{user().name}}
+      </button>
+      <button *ngIf="sesionIniciada() && user().name && (isHandset$ | async)" mat-icon-button color="accent"
+        aria-label="Menú de usuario." [matMenuTriggerFor]="menuUsuario">
+        <mat-icon>person</mat-icon>
+      </button>
 
-            <mat-menu #menuUsuario="matMenu">
-                <menu *ngIf="sesionIniciada() && user().name && (isHandset$ | async)" mat-menu-item disabled>
-                    <mat-icon>person</mat-icon>
-                    {{user().name}}</menu>
-                <mat-divider *ngIf="sesionIniciada() && user().name && (isHandset$ | async)"></mat-divider>
-                <button *ngIf="sesionIniciada()&& isAdmin()" mat-menu-item aria-label="Panel de administrador." [routerLink]="['/admin']" routerLinkActive="router-link-active">
-                  <mat-icon>admin_panel_settings</mat-icon>
-                  Panel de administrador
-                </button>
-                <button *ngIf="sesionIniciada()" mat-menu-item aria-label="Panel de configuración de cuenta.">
+      <mat-menu #menuUsuario="matMenu">
+        <menu *ngIf="sesionIniciada() && user().name && (isHandset$ | async)" mat-menu-item disabled>
+          <mat-icon>person</mat-icon>
+          {{user().name}}
+        </menu>
+        <mat-divider *ngIf="sesionIniciada() && user().name && (isHandset$ | async)"></mat-divider>
+        <button *ngIf="sesionIniciada()&& isAdmin()" mat-menu-item aria-label="Panel de administrador."
+          [routerLink]="['/admin']" routerLinkActive="router-link-active">
+          <mat-icon>admin_panel_settings</mat-icon>
+          Panel de administrador
+        </button>
+        <button *ngIf="sesionIniciada()" mat-menu-item aria-label="Panel de configuración de cuenta.">
           <mat-icon>settings</mat-icon>
           Preferencias
         </button>
-                <button *ngIf="sesionIniciada()" (click)="logout()" mat-menu-item aria-label="Botón cerrar sesión.">
+        <button *ngIf="sesionIniciada()" (click)="logout()" mat-menu-item aria-label="Botón cerrar sesión.">
           <mat-icon>logout</mat-icon>
           Cerrar sesión
         </button>
-            </mat-menu>
+      </mat-menu>
 
-        </mat-toolbar>
-        <router-outlet *ngIf="allLoaded"></router-outlet>
+    </mat-toolbar>
+    <router-outlet *ngIf="allLoaded"></router-outlet>
 
-    </mat-sidenav-content>
+  </mat-sidenav-content>
 
 </mat-sidenav-container>

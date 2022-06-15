@@ -1,0 +1,28 @@
+<h2 mat-dialog-title *ngIf="!this.data.create">Editando {{data.precio.articulo.nombre}}</h2>
+<h2 mat-dialog-title *ngIf="this.data.create">Nueva familia</h2>
+<mat-dialog-content>
+  <div class="errors" *ngIf="data.errors" color>
+    <strong *ngIf="data.errors['precio']">{{data.errors['precio']}}</strong>
+    <strong *ngIf="data.errors['impuesto']">{{data.errors['impuesto']}}</strong>
+  </div>
+  <form [formGroup]="editarPrecio">
+    <div class="aligned">
+      <mat-form-field appearance="outline">
+        <mat-label>Precio</mat-label>
+        <input formControlName="precio" cdkFocusInitial [readonly]="false" matNativeControl type="number">
+        <mat-icon matPrefix>local_offer</mat-icon>
+        <mat-error color="red">{{ errorMessage('precio','El precio no es válido') }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Impuesto</mat-label>
+        <mat-select formControlName="impuesto_id" matNativeControl>
+          <mat-option *ngFor="let impuesto of data.impuestos" [value]="impuesto.id"> {{impuesto.nombre}} </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>local_offer</mat-icon>
+        <mat-error color="red">{{ errorMessage('precio','El precio no es válido') }}</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-stroked-button (click)="guardar()">Listo</button>
+  </form>
+
+</mat-dialog-content>

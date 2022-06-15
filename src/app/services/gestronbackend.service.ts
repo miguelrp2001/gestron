@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, GestronRequest, Centro, Articulo, Familia, Tarifa } from '../interfaces/user';
+import { User, GestronRequest, Centro, Articulo, Familia, Tarifa, Precio, Perfil, Cliente, PuntoVenta } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { APIURL } from './config.constants';
@@ -139,7 +139,7 @@ export class GestronbackendService {
   }
 
   public crearTarifa(tarifa: Tarifa): Observable<GestronRequest> {
-    return this.http.post<GestronRequest>(BACKEND + 'tarifas/create', tarifa);
+    return this.http.post<GestronRequest>(BACKEND + 'tarifas/create', { nombre: tarifa.nombre, centro_id: this.authService.getCentroSeleccionado().id });
   }
 
   public obtenerTarifa(id: number): Observable<GestronRequest> {
@@ -148,6 +148,94 @@ export class GestronbackendService {
 
   public destroyTarifa(tarifa: Tarifa): Observable<GestronRequest> {
     return this.http.delete<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id);
+  }
+
+  public addArticulosTarifa(tarifa: Tarifa, articulos: number[]): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id + '/articulos', { articulos: articulos });
+  }
+
+  public getArticulosTarifa(tarifa: Tarifa): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id + '/articulos');
+  }
+
+  public getArticulosNoTarifa(tarifa: Tarifa): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id + '/notArticulos');
+  }
+
+  // Gestión de precios
+
+  public deletePrecioTarifa(precio: Precio): Observable<GestronRequest> {
+    return this.http.delete<GestronRequest>(BACKEND + 'precios/' + precio.id);
+  }
+
+  public updatePrecioTarifa(precio: Precio): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'precios/' + precio.id + '/edit', precio);
+  }
+
+
+  // Gestión de impuestos
+
+  public obtenerImpuestos(): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'impuestos/list');
+  }
+
+
+  // Gestión de perfiles
+
+  public obtenerPerfiles(): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'perfiles/' + this.authService.getCentroSeleccionado().id + '/list');
+  }
+
+  public addPerfil(perfil: Perfil): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'perfiles/create', perfil);
+  }
+
+  public updatePerfil(perfil: Perfil): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'perfiles/' + perfil.id + '/edit', perfil);
+  }
+
+  public deletePerfil(perfil: Perfil): Observable<GestronRequest> {
+    return this.http.delete<GestronRequest>(BACKEND + 'perfiles/' + perfil.id);
+  }
+
+  public chngStatusPerfil(id: number, estado?: boolean): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'perfiles/' + id + '/status', { estado: estado });
+  }
+
+  // Gestión de clientes
+
+  public obtenerClientes(): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'clientes/' + this.authService.getCentroSeleccionado().id + '/list');
+  }
+
+  public addCliente(cliente: Cliente): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'clientes/create', cliente);
+  }
+
+  public updateCliente(cliente: Cliente): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'clientes/' + cliente.id + '/edit', cliente);
+  }
+
+  public deleteCliente(cliente: Cliente): Observable<GestronRequest> {
+    return this.http.delete<GestronRequest>(BACKEND + 'clientes/' + cliente.id);
+  }
+
+  // Gestión de puntos de venta
+
+  public obtenerPuntosVenta(): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'puntosVenta/' + this.authService.getCentroSeleccionado().id + '/list');
+  }
+
+  public addPuntoVenta(puntoVenta: PuntoVenta): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(BACKEND + 'puntosVenta/create', puntoVenta);
+  }
+
+  public updatePuntoVenta(puntoVenta: PuntoVenta): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'puntosVenta/' + puntoVenta.id + '/edit', puntoVenta);
+  }
+
+  public deletePuntoVenta(puntoVenta: PuntoVenta): Observable<GestronRequest> {
+    return this.http.delete<GestronRequest>(BACKEND + 'puntosVenta/' + puntoVenta.id);
   }
 
 }

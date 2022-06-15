@@ -69,7 +69,6 @@ export class CentrosComponent implements OnInit {
           if (res) {
             let usuariosParaAnadir: number[] = [];
             res.forEach(elegido => {
-              console.log(elegido.value);
               usuariosParaAnadir.push((elegido.value as User).id || 0)
             });
             this.cargandoAdmins = true;

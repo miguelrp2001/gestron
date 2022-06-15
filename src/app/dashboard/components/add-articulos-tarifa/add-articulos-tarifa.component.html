@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Añadir articulos</h1>
+<div mat-dialog-content>
+  <p>Búsqueda por nombre</p>
+  <mat-checkbox #todosMarcados (change)="cambiar(todosMarcados, articulos)"> Seleccionar todos</mat-checkbox>
+  <mat-selection-list #articulos [multiple]="true">
+    <mat-list-option *ngFor="let articulo of data.articulos" [value]="articulo">
+      <div mat-line>{{articulo.nombre}}</div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="">Cancelar</button>
+  <button mat-button *ngIf="articulos.selectedOptions.selected.length > 0"
+    [mat-dialog-close]="articulos.selectedOptions.selected" cdkFocusInitial>Añadir
+    {{articulos.selectedOptions.selected.length}} {{(articulos.selectedOptions.selected.length == 1)? " articulo":"
+    articulos"}}</button>
+</div>

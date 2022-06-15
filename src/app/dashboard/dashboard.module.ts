@@ -12,11 +12,20 @@ import { FamiliasComponent } from './familias/familias.component';
 import { TablaFamiliasComponent } from './components/tabla-familias/tabla-familias.component';
 import { FormFamiliaComponent } from './components/form-familia/form-familia.component';
 import { TarifasComponent } from './tarifas/tarifas.component';
-import { TablaTarifasComponent } from './components/tabla-tarifas/tabla-tarifas.component';
 import { FormTarifaComponent } from './components/form-tarifa/form-tarifa.component';
 import { FormPerfilComponent } from './components/form-perfil/form-perfil.component';
 import { TablaPerfilesComponent } from './components/tabla-perfiles/tabla-perfiles.component';
 import { PerfilesComponent } from './perfiles/perfiles.component';
+import { AddArticulosTarifaComponent } from './components/add-articulos-tarifa/add-articulos-tarifa.component';
+import { EditPrecioComponent } from './components/edit-precio/edit-precio.component';
+import { EditTarifaComponent } from './components/edit-tarifa/edit-tarifa.component';
+import { PosComponent } from './pos/pos.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { TablaClientesComponent } from './components/tabla-clientes/tabla-clientes.component';
+import { FormClientesComponent } from './components/form-clientes/form-clientes.component';
+import { FormPerfilesComponent } from './components/form-perfiles/form-perfiles.component';
+import { TablaPosComponent } from './components/tabla-pos/tabla-pos.component';
+import { FormPosComponent } from './components/form-pos/form-pos.component';
 
 
 
@@ -30,11 +39,20 @@ import { PerfilesComponent } from './perfiles/perfiles.component';
     TablaFamiliasComponent,
     FormFamiliaComponent,
     TarifasComponent,
-    TablaTarifasComponent,
     FormTarifaComponent,
     FormPerfilComponent,
     TablaPerfilesComponent,
     PerfilesComponent,
+    AddArticulosTarifaComponent,
+    EditPrecioComponent,
+    EditTarifaComponent,
+    PosComponent,
+    ClientesComponent,
+    TablaClientesComponent,
+    FormClientesComponent,
+    FormPerfilesComponent,
+    TablaPosComponent,
+    FormPosComponent,
   ],
   imports: [
     CommonModule,

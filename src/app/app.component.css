@@ -15,7 +15,7 @@
 }
 
 .sidenav {
-    width: 250px;
+    width: 260px;
 }
 
 .sidenav .mat-toolbar {
@@ -26,4 +26,95 @@
     position: sticky;
     top: 0;
     z-index: 50;
+}
+
+
+a.active {
+    background-color: #414141;
+}
+
+a.active::before {
+  width: 4px;
+  left: .5em;
+  border-radius: 10px;
+  top: .75em;
+  height: 1.5em;
+  position: absolute;
+  float: left;
+  background-color: var(--primary-lighter-color);
+  transition: all .15s ease-in-out;
+  content: " ";
+}
+
+a.active:hover::before {
+  width: 4px;
+  left: .5em;
+  border-radius: 10px;
+  top: .65em;
+  height: 1.8em;
+  position: absolute;
+  float: left;
+  background-color: var(--primary-color);
+  transition: all .05s ease-in-out;
+  content: " ";
+}
+
+a.active:active::before {
+  width: 4px;
+  left: .5em;
+  border-radius: 10px;
+  top: .50em;
+  height: 2em;
+  position: absolute;
+  float: left;
+  background-color: var(--primary-color);
+  transition: all .05s ease-in-out;
+  content: " ";
+}
+
+a::before {
+  width: 4px;
+  left: .5em;
+  border-radius: 10px;
+  top: 1.4em;
+  height: 0;
+  position: absolute;
+  float: left;
+  background-color: var(--primary-lighter-color);
+  content: " ";
+  transition: all .1s ease-in-out;
+}
+
+a:hover::before {
+  width: 4px;
+  left: .5em;
+  border-radius: 10px;
+  top: 1.30em;
+  height: .25em;
+  position: absolute;
+  float: left;
+  background-color: var(--primary-lighter-color);
+  content: " ";
+  transition: all .01s ease-in;
+
+}
+
+
+::-webkit-scrollbar {
+  width: 0px;
+  position: sticky;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2c2c2c;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #393939;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #414141;
 }

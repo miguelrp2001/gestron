@@ -9,10 +9,22 @@ export interface Data {
   users?: User[];
   centro?: Centro;
   centros?: Centro[];
+  precio?: Precio;
+  precios?: Precio[];
+  tarifa?: Tarifa;
+  tarifas?: Tarifa[];
+  perfil?: Perfil;
+  perfiles?: Perfil[];
+  cliente?: Cliente;
+  clientes?: Cliente[];
   familia?: Familia;
   familias?: Familia[];
   articulo?: Articulo;
   articulos?: Articulo[];
+  impuesto?: Impuesto;
+  impuestos?: Impuesto[];
+  puntoVenta?: PuntoVenta;
+  puntosVenta?: PuntoVenta[];
 }
 
 export interface User {
@@ -53,18 +65,19 @@ export interface Centro {
 }
 
 export interface Tarifa {
-  id?: number;
-  nombre: string;
-  precios: Precio[];
+  id: number;
+  nombre?: string;
+  precios?: Precio[];
   updated_at?: Date;
   created_at?: Date;
 }
 
 export interface Precio {
-  id?: number;
+  id: number;
   precio: number;
   impuesto: Impuesto;
-  articulo_id: number;
+  articulo_id?: number;
+  articulo: Articulo;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -77,6 +90,7 @@ export interface Impuesto {
   created_at?: Date;
   updated_at?: Date;
 }
+
 export interface Familia {
   id: number;
   nombre: string;
@@ -85,6 +99,37 @@ export interface Familia {
   articulos?: Articulo[];
   created_at?: null;
   updated_at?: null;
+}
+
+export interface Perfil {
+  id: number;
+  nombre: string;
+  clave?: number;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface Cliente {
+  id: number;
+  nombre: string;
+  direccion: string;
+  nif: string;
+  telefono: string;
+  correo: string;
+  centro_id: number;
+  nombre_fiscal: string;
+  nif_fiscal: string;
+  ticketCorreo: boolean;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface PuntoVenta {
+  id: number;
+  nombre: string;
+  token?: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 // Converts JSON strings to/from your types

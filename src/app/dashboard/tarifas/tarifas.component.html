@@ -1,1 +1,55 @@
-<p>tarifas works!</p>
+<div class="backg">
+  <mat-card *ngIf="cargandoTarifas">
+    <mat-card-content>
+      <div class=" progressspin">
+        <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-accordion *ngIf="!cargandoTarifas">
+    <mat-expansion-panel *ngFor="let tarifa of tarifas" (opened)="getPrecios(tarifa)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{tarifa.nombre}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <div mat-subheader>Precios de la tarifa <span class=" spacer"></span> <button mat-icon-button
+            (click)="addArticuloTarifa(tarifa)" id="btnAddArticles">
+            <mat-icon>add_shopping_cart</mat-icon>
+          </button>
+        </div>
+        <div class="progressspin" *ngIf="cargandoPrecios">
+          <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+        </div>
+        <div *ngIf="!cargandoPrecios && precios.length === 0" class="errorCentrado">
+          No hay artículos para mostrar
+        </div>
+        <div *ngIf="!cargandoPrecios">
+          <mat-list>
+
+            <mat-list-item *ngFor="let precio of precios">
+              <mat-icon mat-list-icon>shopping_cart</mat-icon>
+              <div mat-line>{{precio.articulo.nombre}}</div>
+              <div mat-line>{{precio.precio}}€ ({{precio.impuesto.nombre }})</div>
+              <button mat-icon-button color="accent" id="{{precio.id+'_EDIT'}}"
+                (click)="editPrecioTarifa(precio, tarifa)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" id="{{precio.id+'_DEL'}}"
+                (click)="deletePrecioTarifa(precio, tarifa)">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-list>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="editarTarifa(tarifa)">Editar</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-fab class="floatingButton" (click)="createTarifa()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

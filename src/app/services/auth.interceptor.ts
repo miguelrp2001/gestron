@@ -1,19 +1,17 @@
 import { Injectable } from "@angular/core";
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpClient, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { TokenService } from "./token.service";
 import { catchError, Observable } from 'rxjs';
 import { AuthStateService } from './auth-state.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { APIIP, APIURL } from './config.constants';
+import { APIIP } from './config.constants';
 
 const BACKENDIP = APIIP;
 @Injectable()
 
 export class AuthInterceptor implements HttpInterceptor {
-
-
-  constructor(private tokenService: TokenService, private http: HttpClient, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private tokenService: TokenService, private token: TokenService, private authState: AuthStateService, private router: Router, private snackBar: MatSnackBar) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = this.tokenService.getToken();
     if (req.url.includes(BACKENDIP) && req.url.includes('api') && !req.url.includes('login')) {

@@ -11,13 +11,18 @@ import { ArticulosComponent } from './dashboard/articulos/articulos.component';
 import { FamiliasComponent } from './dashboard/familias/familias.component';
 import { TarifasComponent } from './dashboard/tarifas/tarifas.component';
 import { PerfilesComponent } from './dashboard/perfiles/perfiles.component';
+import { PosComponent } from './dashboard/pos/pos.component';
+import { ClientesComponent } from './dashboard/clientes/clientes.component';
 
 const routes: Routes = [
-  { path: "", component: DashIndexComponent, canActivate: [CanActivateLogin] },
+  { path: "", redirectTo: "dashboard", pathMatch: "full" },
+  { path: "dashboard", component: DashIndexComponent, canActivate: [CanActivateLogin] },
   { path: "articulos", component: ArticulosComponent, canActivate: [CanActivateLogin] },
   { path: "familias", component: FamiliasComponent, canActivate: [CanActivateLogin] },
   { path: "tarifas", component: TarifasComponent, canActivate: [CanActivateLogin] },
   { path: "perfiles", component: PerfilesComponent, canActivate: [CanActivateLogin] },
+  { path: "pos", component: PosComponent, canActivate: [CanActivateLogin] },
+  { path: "clientes", component: ClientesComponent, canActivate: [CanActivateLogin] },
   {
     path: "admin", component: DashboardComponent, canActivate: [CanActivateLogin, CanActivateAdmin], children: [
       { path: "", component: AdmindashComponent },

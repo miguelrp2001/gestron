@@ -13,11 +13,7 @@ export interface Errors { nombre?: string[] };
 })
 export class FormFamiliaComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<DiagReceived>,
-    @Inject(MAT_DIALOG_DATA) public data: DiagReceived,) {
-    console.log(this.data);
-
-
-  }
+    @Inject(MAT_DIALOG_DATA) public data: DiagReceived,) { }
 
   editarFamilia: FormGroup = this.fb.group({
     id: [this.data.familia.id],
