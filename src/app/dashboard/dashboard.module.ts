@@ -23,7 +23,6 @@ import { PosComponent } from './pos/pos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { TablaClientesComponent } from './components/tabla-clientes/tabla-clientes.component';
 import { FormClientesComponent } from './components/form-clientes/form-clientes.component';
-import { FormPerfilesComponent } from './components/form-perfiles/form-perfiles.component';
 import { TablaPosComponent } from './components/tabla-pos/tabla-pos.component';
 import { FormPosComponent } from './components/form-pos/form-pos.component';
 
@@ -50,7 +49,6 @@ import { FormPosComponent } from './components/form-pos/form-pos.component';
     ClientesComponent,
     TablaClientesComponent,
     FormClientesComponent,
-    FormPerfilesComponent,
     TablaPosComponent,
     FormPosComponent,
   ],
