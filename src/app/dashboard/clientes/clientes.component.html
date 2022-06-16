@@ -1,1 +1,79 @@
-<p>clientes works!</p>
+<div class="backg">
+  <mat-card *ngIf="cargandoClientes">
+    <mat-card-content>
+      <div class=" progressspin">
+        <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-accordion *ngIf="!cargandoClientes">
+    <mat-expansion-panel *ngFor="let cliente of clientes" (opened)="getDatos(cliente)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{cliente.nombre}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <div mat-subheader>Información del centro</div>
+        <mat-list-item>
+          <mat-icon mat-list-icon>place</mat-icon>
+          <div mat-line>{{cliente.direccion}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>business</mat-icon>
+          <div mat-line>{{cliente.nombre_fiscal}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>gavel</mat-icon>
+          <div mat-line>{{cliente.nif}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>phone</mat-icon>
+          <div mat-line>{{cliente.telefono}}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>email</mat-icon>
+          <div mat-line class="flex">{{cliente.correo}} <span class="spacer"> </span>
+            <mat-slide-toggle #s{{cliente.id}} [checked]="cliente.ticketCorreo" matTooltip="Cambiar estado"
+              matTooltipPosition="left" matTooltipHideDelay="100" (change)="updateStatus($event)" title="Cambiar estado"
+              id="{{cliente.id}}" labelPosition="before">Enviar ticket</mat-slide-toggle>
+          </div>
+        </mat-list-item>
+        <div mat-subheader>Tickets recientes</div>
+        <div class="progressspin" *ngIf="cargandoDatosCliente">
+          <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+        </div>
+        <div *ngIf="!cargandoDatosCliente && clientes.length === 0" class="errorCentrado">
+          No hay tickets para mostrar
+        </div>
+        <div *ngIf="!cargandoDatosCliente">
+          <!-- <mat-list>
+
+            <mat-list-item *ngFor="let precio of precios">
+              <mat-icon mat-list-icon>shopping_cart</mat-icon>
+              <div mat-line>{{precio.articulo.nombre}}</div>
+              <div mat-line>{{precio.precio}}€ ({{precio.impuesto.nombre }})</div>
+              <button mat-icon-button color="accent" id="{{precio.id+'_EDIT'}}"
+                (click)="editPrecioTarifa(precio, tarifa)" matTooltip="Editar precio" matTooltipPosition="above"
+                matTooltipHideDelay="100" title="Editar precio">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" id="{{precio.id+'_DEL'}}"
+                (click)="deletePrecioTarifa(precio, tarifa)" matTooltip="Eliminar precio" matTooltipPosition="above"
+                matTooltipHideDelay="100" title="Eliminar precio">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list> -->
+        </div>
+      </mat-list>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="editarCliente(cliente)">Editar cliente</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-fab class="floatingButton" (click)="createCliente()" matTooltip="Crear cliente" matTooltipPosition="left"
+    matTooltipHideDelay="1000" title="Crear cliente">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

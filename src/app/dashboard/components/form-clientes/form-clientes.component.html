@@ -1,1 +1,58 @@
-<p>form-clientes works!</p>
+<h2 mat-dialog-title *ngIf="!this.data.create">Editando {{data.cliente.nombre}}</h2>
+<h2 mat-dialog-title *ngIf="this.data.create">Nuevo cliente</h2>
+<mat-dialog-content>
+  <div class="errors" *ngIf="data.errors" color>
+    <strong *ngIf="data.errors['nombre']">{{data.errors['nombre']}}</strong>
+    <strong *ngIf="data.errors['nombre_corto']">{{data.errors['nombre_corto']}}</strong>
+    <strong *ngIf="data.errors['color']">{{data.errors['color']}}</strong>
+    <strong *ngIf="data.errors['familia']">{{data.errors['familia']}}</strong>
+  </div>
+  <form [formGroup]="editarCliente">
+    <div class="aligned">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" cdkFocusInitial [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>text_fields</mat-icon>
+        <mat-error color="red">{{ errorMessage('nombre','El nombre no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre Fiscal</mat-label>
+        <input formControlName="nombre_fiscal" [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>business</mat-icon>
+        <mat-error color="red">{{ errorMessage('nombre_fiscal','El nombre fiscal no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input formControlName="direccion" [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>place</mat-icon>
+        <mat-error color="red">{{ errorMessage('direccion','La dirección no es válida') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>NIF/CIF</mat-label>
+        <input formControlName="nif" [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>gavel</mat-icon>
+        <mat-error color="red">{{ errorMessage('nif','El NIF/CIF no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input formControlName="correo" [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>email</mat-icon>
+        <mat-error color="red">{{ errorMessage('correo','El nombre corto no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+        <input formControlName="telefono" [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>phone</mat-icon>
+        <mat-error color="red">{{ errorMessage('telefono','El nombre corto no es válido') }}</mat-error>
+      </mat-form-field>
+
+    </div>
+    <button mat-stroked-button (click)="guardar()">Listo</button>
+  </form>
+
+</mat-dialog-content>

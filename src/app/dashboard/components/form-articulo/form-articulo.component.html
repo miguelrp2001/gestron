@@ -1,55 +1,57 @@
 <h2 mat-dialog-title *ngIf="!this.data.create">Editando {{data.articulo.nombre}}</h2>
 <h2 mat-dialog-title *ngIf="this.data.create">Nuevo articulo</h2>
 <mat-dialog-content>
-    <div class="errors" *ngIf="data.errors" color>
-        <strong *ngIf="data.errors['nombre']">{{data.errors['nombre']}}</strong>
-        <strong *ngIf="data.errors['nombre_corto']">{{data.errors['nombre_corto']}}</strong>
-        <strong *ngIf="data.errors['color']">{{data.errors['color']}}</strong>
-        <strong *ngIf="data.errors['familia']">{{data.errors['familia']}}</strong>
+  <div class="errors" *ngIf="data.errors" color>
+    <strong *ngIf="data.errors['nombre']">{{data.errors['nombre']}}</strong>
+    <strong *ngIf="data.errors['nombre_corto']">{{data.errors['nombre_corto']}}</strong>
+    <strong *ngIf="data.errors['color']">{{data.errors['color']}}</strong>
+    <strong *ngIf="data.errors['familia']">{{data.errors['familia']}}</strong>
+  </div>
+  <form [formGroup]="editarArticulo">
+    <div class="aligned">
+      <mat-form-field appearance="outline" *ngIf="!this.data.create">
+        <mat-label>Código</mat-label>
+        <input formControlName="id" [readonly]="true" matNativeControl type="number"
+          placeholder="Generado automáticamente">
+        <mat-icon matPrefix>badge</mat-icon>
+        <mat-error color="aed"></mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" cdkFocusInitial [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>text_fields</mat-icon>
+        <mat-error color="red">{{ errorMessage('nombre','El nombre no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre Corto</mat-label>
+        <input formControlName="nombre_corto" [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>format_size</mat-icon>
+        <mat-error color="red">{{ errorMessage('nombre_corto','El nombre corto no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Color</mat-label>
+        <input class="colorpick" formControlName="color" [readonly]="false" matNativeControl type="color"
+          placeholder="#FFFFFF">
+        <mat-icon matPrefix>palette</mat-icon>
+        <mat-error color="red">{{ errorMessage('color','El color no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Familia</mat-label>
+        <mat-select formControlName="familia" [value]="data.articulo.familia_id">
+          <mat-option *ngFor="let familia of this.data.familias" [value]="familia.id">
+            {{familia.nombre}}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>mediation</mat-icon>
+        <mat-error color="red">{{ errorMessage('familia','La familia no es válido') }}</mat-error>
+      </mat-form-field>
+
     </div>
-    <form [formGroup]="editarArticulo">
-        <div class="aligned">
-            <mat-form-field appearance="outline" *ngIf="!this.data.create">
-                <mat-label>Código</mat-label>
-                <input formControlName="id" [readonly]="true" matNativeControl type="number" placeholder="Generado automáticamente">
-                <mat-icon matPrefix>badge</mat-icon>
-                <mat-error color="red"></mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Nombre</mat-label>
-                <input formControlName="nombre" cdkFocusInitial [readonly]="false" matNativeControl type="text">
-                <mat-icon matPrefix>text_fields</mat-icon>
-                <mat-error color="red">{{ errorMessage('nombre','El nombre no es válido') }}</mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Nombre Corto</mat-label>
-                <input formControlName="nombre_corto" [readonly]="false" matNativeControl type="text">
-                <mat-icon matPrefix>format_size</mat-icon>
-                <mat-error color="red">{{ errorMessage('nombre_corto','El nombre corto no es válido') }}</mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Color</mat-label>
-                <input class="colorpick" formControlName="color" [readonly]="false" matNativeControl type="color" placeholder="#FFFFFF">
-                <mat-icon matPrefix>palette</mat-icon>
-                <mat-error color="red">{{ errorMessage('color','El color no es válido') }}</mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Familia</mat-label>
-                <mat-select formControlName="familia" [value]="data.articulo.familia_id">
-                    <mat-option *ngFor="let familia of this.data.familias" [value]="familia.id">
-                        {{familia.nombre}}
-                    </mat-option>
-                </mat-select>
-                <mat-icon matPrefix>mediation</mat-icon>
-                <mat-error color="red">{{ errorMessage('familia','La familia no es válido') }}</mat-error>
-            </mat-form-field>
-
-        </div>
-        <button mat-stroked-button (click)="guardar()">Listo</button>
-    </form>
+    <button mat-stroked-button (click)="guardar()">Listo</button>
+  </form>
 
 </mat-dialog-content>

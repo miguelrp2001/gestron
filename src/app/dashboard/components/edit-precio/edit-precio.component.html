@@ -9,7 +9,8 @@
     <div class="aligned">
       <mat-form-field appearance="outline">
         <mat-label>Precio</mat-label>
-        <input formControlName="precio" cdkFocusInitial [readonly]="false" matNativeControl type="number">
+        <input formControlName="precio" #precio cdkFocusInitial (focus)="precio.select()" matInput [readonly]="false"
+          matNativeControl type="number">
         <mat-icon matPrefix>local_offer</mat-icon>
         <mat-error color="red">{{ errorMessage('precio','El precio no es válido') }}</mat-error>
       </mat-form-field>

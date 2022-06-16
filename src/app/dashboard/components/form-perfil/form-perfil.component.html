@@ -1,1 +1,27 @@
-<p>form-perfil works!</p>
+<h2 mat-dialog-title *ngIf="!this.data.create">Editando {{data.perfil.nombre}}</h2>
+<h2 mat-dialog-title *ngIf="this.data.create">Nuevo perfil</h2>
+<mat-dialog-content>
+  <div class="errors" *ngIf="data.errors" color>
+    <strong *ngIf="data.errors['nombre']">{{data.errors['nombre']}}</strong>
+    <strong *ngIf="data.errors['clave']">{{data.errors['clave']}}</strong>
+  </div>
+  <form [formGroup]="editarPerfil">
+    <div class="aligned">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" cdkFocusInitial [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>text_fields</mat-icon>
+        <mat-error color="red">{{ errorMessage('nombre','El nombre no es válido') }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Clave</mat-label>
+        <input formControlName="clave" class="esPassword" [readonly]="false" matNativeControl type="number"
+          inputmode="numeric">
+        <mat-icon matPrefix>text_fields</mat-icon>
+        <mat-error color="red">{{ errorMessage('clave','La clave no es válida') }}</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-stroked-button (click)="guardar()">Listo</button>
+  </form>
+
+</mat-dialog-content>

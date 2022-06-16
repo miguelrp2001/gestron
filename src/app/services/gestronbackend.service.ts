@@ -187,11 +187,11 @@ export class GestronbackendService {
   }
 
   public addPerfil(perfil: Perfil): Observable<GestronRequest> {
-    return this.http.post<GestronRequest>(BACKEND + 'perfiles/create', perfil);
+    return this.http.post<GestronRequest>(BACKEND + 'perfiles/create', { centro_id: this.authService.getCentroSeleccionado().id, nombre: perfil.nombre, clave: perfil.clave || null });
   }
 
   public updatePerfil(perfil: Perfil): Observable<GestronRequest> {
-    return this.http.put<GestronRequest>(BACKEND + 'perfiles/' + perfil.id + '/edit', perfil);
+    return this.http.put<GestronRequest>(BACKEND + 'perfiles/' + perfil.id + '/edit', { nombre: perfil.nombre, clave: perfil.clave || null, centro_id: this.authService.getCentroSeleccionado().id });
   }
 
   public deletePerfil(perfil: Perfil): Observable<GestronRequest> {
@@ -218,6 +218,10 @@ export class GestronbackendService {
 
   public deleteCliente(cliente: Cliente): Observable<GestronRequest> {
     return this.http.delete<GestronRequest>(BACKEND + 'clientes/' + cliente.id);
+  }
+
+  public updateStatusClienteMail(id: number, estado?: boolean): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'clientes/' + id + '/mailstatus', { estado: estado });
   }
 
   // Gestión de puntos de venta

@@ -1,0 +1,25 @@
+app-tabla-articulos {
+  width: 100%;
+}
+
+div.backg {
+  padding: 1em;
+}
+
+.progressspin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.floatingButton {
+  float: right;
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+}

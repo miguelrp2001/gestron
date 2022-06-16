@@ -105,6 +105,7 @@ export interface Perfil {
   id: number;
   nombre: string;
   clave?: number;
+  activo?: boolean;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -116,10 +117,9 @@ export interface Cliente {
   nif: string;
   telefono: string;
   correo: string;
-  centro_id: number;
+  centro_id?: number;
   nombre_fiscal: string;
-  nif_fiscal: string;
-  ticketCorreo: boolean;
+  ticketCorreo?: boolean;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -128,6 +128,8 @@ export interface PuntoVenta {
   id: number;
   nombre: string;
   token?: string;
+  centro_id?: number;
+  creadoPor?: number;
   created_at?: Date;
   updated_at?: Date;
 }

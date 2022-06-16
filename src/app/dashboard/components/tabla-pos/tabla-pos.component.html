@@ -1,1 +1,45 @@
-<p>tabla-pos works!</p>
+<div class="fondoTabla">
+  <table mat-table [dataSource]="puntosventa">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let pos"> {{pos.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let pos"> {{pos.nombre}} </td>
+    </ng-container>
+    <ng-container matColumnDef="token">
+      <th mat-header-cell *matHeaderCellDef> Token </th>
+      <td mat-cell *matCellDef="let pos" class="acorta"> {{pos.token}} </td>
+    </ng-container>
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef=" let pos">
+        <mat-slide-toggle #s{{perfil.id}} [checked]="pos.activo" matTooltip="Cambiar estado" matTooltipPosition="left"
+          matTooltipHideDelay="100" title="Cambiar estado" [id]="pos.id" (change)="updateStatus($event)">
+        </mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let pos">
+        <button mat-icon-button [cdkCopyToClipboard]="pos.token" (click)="copiado()" matTooltip="Copiar token"
+          matTooltipPosition="left" matTooltipHideDelay="100" title="Copiar token">
+          <mat-icon>copy</mat-icon>
+        </button>
+        <button mat-icon-button (click)="editarPos(pos)" matTooltip="Editar perfil" matTooltipPosition="right"
+          matTooltipHideDelay="100" title="Editar perfil">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row
+      *matHeaderRowDef="(isHandset$ | async)? ['nombre', 'token' , 'estado', 'acciones']:['nombre', 'token', 'estado', 'acciones']">
+    </tr>
+    <tr mat-row
+      *matRowDef="let row; columns: (isHandset$ | async)? ['nombre', 'token', 'estado', 'acciones']:['nombre', 'token', 'estado', 'acciones'];">
+    </tr>
+  </table>
+</div>

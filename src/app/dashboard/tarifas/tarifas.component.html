@@ -15,7 +15,8 @@
       </mat-expansion-panel-header>
       <mat-list>
         <div mat-subheader>Precios de la tarifa <span class=" spacer"></span> <button mat-icon-button
-            (click)="addArticuloTarifa(tarifa)" id="btnAddArticles">
+            (click)="addArticuloTarifa(tarifa)" id="btnAddArticles" matTooltip="Añadir artículo"
+            matTooltipPosition="left" matTooltipHideDelay="100" title="Añadir artículo">
             <mat-icon>add_shopping_cart</mat-icon>
           </button>
         </div>
@@ -33,11 +34,13 @@
               <div mat-line>{{precio.articulo.nombre}}</div>
               <div mat-line>{{precio.precio}}€ ({{precio.impuesto.nombre }})</div>
               <button mat-icon-button color="accent" id="{{precio.id+'_EDIT'}}"
-                (click)="editPrecioTarifa(precio, tarifa)">
+                (click)="editPrecioTarifa(precio, tarifa)" matTooltip="Editar precio" matTooltipPosition="above"
+                matTooltipHideDelay="100" title="Editar precio">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button color="warn" id="{{precio.id+'_DEL'}}"
-                (click)="deletePrecioTarifa(precio, tarifa)">
+                (click)="deletePrecioTarifa(precio, tarifa)" matTooltip="Eliminar precio" matTooltipPosition="above"
+                matTooltipHideDelay="100" title="Eliminar precio">
                 <mat-icon>remove</mat-icon>
               </button>
             </mat-list-item>
@@ -45,11 +48,12 @@
         </div>
       </mat-list>
       <mat-action-row>
-        <button mat-button color="primary" (click)="editarTarifa(tarifa)">Editar</button>
+        <button mat-button color="primary" (click)="editarTarifa(tarifa)">Editar tarifa</button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
-  <button mat-fab class="floatingButton" (click)="createTarifa()">
+  <button mat-fab class="floatingButton" (click)="createTarifa()" matTooltip="Crear tarifa" matTooltipPosition="left"
+    matTooltipHideDelay="1000" title="Crear tarifa">
     <mat-icon>add</mat-icon>
   </button>
 </div>

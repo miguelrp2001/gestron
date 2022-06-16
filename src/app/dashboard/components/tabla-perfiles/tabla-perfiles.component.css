@@ -1,0 +1,27 @@
+.fondoTabla,
+table {
+    width: 100%;
+}
+
+.lineaColor {
+    width: 4px;
+    height: 2.7em;
+    float: left;
+    color: #ffffff00;
+    align-self: center;
+    border-radius: 10px;
+    margin-right: 3px;
+}
+
+td {
+    margin-right: 3px;
+}
+
+@media screen and (max-width:470px) {
+    .acorta {
+        max-width: 6em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

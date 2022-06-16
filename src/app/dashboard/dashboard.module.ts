@@ -12,7 +12,6 @@ import { FamiliasComponent } from './familias/familias.component';
 import { TablaFamiliasComponent } from './components/tabla-familias/tabla-familias.component';
 import { FormFamiliaComponent } from './components/form-familia/form-familia.component';
 import { TarifasComponent } from './tarifas/tarifas.component';
-import { FormTarifaComponent } from './components/form-tarifa/form-tarifa.component';
 import { FormPerfilComponent } from './components/form-perfil/form-perfil.component';
 import { TablaPerfilesComponent } from './components/tabla-perfiles/tabla-perfiles.component';
 import { PerfilesComponent } from './perfiles/perfiles.component';
@@ -21,7 +20,6 @@ import { EditPrecioComponent } from './components/edit-precio/edit-precio.compon
 import { EditTarifaComponent } from './components/edit-tarifa/edit-tarifa.component';
 import { PosComponent } from './pos/pos.component';
 import { ClientesComponent } from './clientes/clientes.component';
-import { TablaClientesComponent } from './components/tabla-clientes/tabla-clientes.component';
 import { FormClientesComponent } from './components/form-clientes/form-clientes.component';
 import { TablaPosComponent } from './components/tabla-pos/tabla-pos.component';
 import { FormPosComponent } from './components/form-pos/form-pos.component';
@@ -38,7 +36,6 @@ import { FormPosComponent } from './components/form-pos/form-pos.component';
     TablaFamiliasComponent,
     FormFamiliaComponent,
     TarifasComponent,
-    FormTarifaComponent,
     FormPerfilComponent,
     TablaPerfilesComponent,
     PerfilesComponent,
@@ -47,7 +44,6 @@ import { FormPosComponent } from './components/form-pos/form-pos.component';
     EditTarifaComponent,
     PosComponent,
     ClientesComponent,
-    TablaClientesComponent,
     FormClientesComponent,
     TablaPosComponent,
     FormPosComponent,

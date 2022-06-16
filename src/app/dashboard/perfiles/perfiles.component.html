@@ -1,1 +1,15 @@
-<p>perfiles works!</p>
+<div class="backg">
+  <mat-card>
+    <mat-card-content>
+      <div class="progressspin" *ngIf="actualizandoPerfiles()">
+        <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+      </div>
+      <app-tabla-perfiles *ngIf="!actualizandoPerfiles()" [perfiles]="perfiles" (actualizarPerfiles)="updatePerfiles()">
+      </app-tabla-perfiles>
+    </mat-card-content>
+  </mat-card>
+  <button mat-fab class="floatingButton" (click)="createPerfil()" matTooltip="Crear perfil" matTooltipPosition="left"
+    matTooltipHideDelay="1000" title="Crear perfil">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

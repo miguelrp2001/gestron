@@ -1,1 +1,15 @@
-<p>pos works!</p>
+<div class="backg">
+  <mat-card>
+    <mat-card-content>
+      <div class="progressspin" *ngIf="actualizandoPOSs()">
+        <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+      </div>
+      <app-tabla-pos *ngIf="!actualizandoPOSs()" [puntosventa]="puntosventa" (actualizarArticulos)="actualizarPOS()">
+      </app-tabla-pos>
+    </mat-card-content>
+  </mat-card>
+  <button mat-fab class="floatingButton" (click)="crearPuntoVenta()" matTooltip="Crear punto de venta"
+    matTooltipPosition="left" matTooltipHideDelay="1000" title="Crear punto de venta">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
