@@ -31,7 +31,7 @@ export interface User {
   id?: number;
   activo?: boolean;
   name: string;
-  admin?: boolean;
+  admin: boolean;
   email: string;
   telefono: string;
   ipRegistro?: string;
@@ -46,6 +46,7 @@ export interface Articulo {
   nombre: string;
   nombre_corto: string;
   color: string;
+  codBarras?: string;
   familia_id?: number;
   familia?: number;
   created_at?: null;
@@ -132,6 +133,17 @@ export interface PuntoVenta {
   creadoPor?: number;
   created_at?: Date;
   updated_at?: Date;
+}
+
+export interface FormRegistro {
+  nombre: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  telefono: string;
+  nombre_empresa: string;
+  nombre_legal: string;
+  nif: string;
 }
 
 // Converts JSON strings to/from your types

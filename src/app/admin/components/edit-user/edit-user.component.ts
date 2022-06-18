@@ -26,6 +26,8 @@ export class EditUserComponent implements OnInit {
     email: [this.data.user.email, [Validators.required, Validators.email]],
     name: [this.data.user.name, [Validators.required, Validators.minLength(2)]],
     telefono: [this.data.user.telefono, [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+    admin: [this.data.user.admin, [Validators.required]],
+    activo: [this.data.user.activo, [Validators.required]],
     ipRegistro: [this.data.user.ipRegistro],
     ipUltLogin: [this.data.user.ipUltLogin],
     updated_at: [this.data.user.updated_at],

@@ -64,10 +64,30 @@ export class LoginIndexComponent implements OnInit {
 
   }
 
-  registro() {
+  registro(data?: any, errors?: string[]) {
     let dialogRef = this.dialog.open(RegisterFormComponent, {
-      height: '400px',
-      width: '600px',
+      data: {
+        data: data || {},
+        errors: errors
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.iniciandoSesion = true;
+        this.authService.register(result).subscribe((res: GestronRequest) => {
+          this.procesarRespuesta(res.data);
+          this.iniciandoSesion = false;
+        }, (error) => {
+          this.iniciandoSesion = false;
+          this.registro(result, error.error.errors);
+        },
+          () => {
+            this.authState.setAuthState(true);
+            this.formularioLogin.reset();
+            this.iniciandoSesion = false;
+          });
+      }
     });
   }
 

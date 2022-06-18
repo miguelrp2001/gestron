@@ -6,6 +6,14 @@ form {
     justify-content: center;
 }
 
+.aligned {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: .5em;
+  justify-content: center;
+}
+
 mat-form-field {
     width: 49%;
 }

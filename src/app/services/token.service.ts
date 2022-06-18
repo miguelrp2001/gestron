@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AUTHURL } from './auth.service';
+import { SecureStorageService } from './secure-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
-  constructor() { }
+  constructor(private secureStorage: SecureStorageService) { }
 
   handleData(token: any) {
     localStorage.setItem('auth_token', token);

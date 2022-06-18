@@ -1,53 +1,80 @@
-<form [formGroup]="registroUsuario">
-    <mat-form-field appearance="outline">
+<h2>Registro</h2>
+<mat-dialog-content>
+  <div class="errors" *ngIf="data.errors" color>
+    <strong *ngIf="data.errors['nombre']">{{data.errors['nombre']}}</strong>
+    <strong *ngIf="data.errors['email']">{{data.errors['email']}}</strong>
+    <strong *ngIf="data.errors['nombre_empresa']">{{data.errors['nombre_empresa']}}</strong>
+    <strong *ngIf="data.errors['nombre_legal']">{{data.errors['nombre_legal']}}</strong>
+    <strong *ngIf="data.errors['nif']">{{data.errors['nif']}}</strong>
+    <strong *ngIf="data.errors['telefono']">{{data.errors['telefono']}}</strong>
+    <strong *ngIf="data.errors['password_confirmation']">{{data.errors['password_confirmation']}}</strong>
+  </div>
+  <form [formGroup]="registroUsuario">
+    <div class="aligned">
+      <mat-form-field appearance="outline">
         <mat-label>Nombre</mat-label>
-        <input formControlName="name" [readonly]="false" matNativeControl type="text" placeholder="yo@dominio.com">
+        <input formControlName="nombre" [readonly]="false" matNativeControl type="text"
+          placeholder="Introduzca su nombre">
         <mat-icon matPrefix>account_circle</mat-icon>
-        <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
-    </mat-form-field>
+        <mat-error color="red">{{ mailErrorMessage('nombre','El nombre no es válido') }}</mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Nombre de la empresa</mat-label>
-        <input formControlName="name" [readonly]="false" matNativeControl type="text" placeholder="yo@dominio.com">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del negocio</mat-label>
+        <input formControlName="nombre_empresa" [readonly]="false" matNativeControl type="text"
+          placeholder="Introduzca el nombre de su negocio">
         <mat-icon matPrefix>store</mat-icon>
-        <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
-    </mat-form-field>
+        <mat-error color="red">{{ mailErrorMessage('nombre_empresa','El nombre del negocio no es válido') }}
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Nombre legal</mat-label>
-        <input formControlName="name" [readonly]="false" matNativeControl type="text" placeholder="yo@dominio.com">
+        <input formControlName="nombre_legal" [readonly]="false" matNativeControl type="text"
+          placeholder="Introduzca el nombre legal de su negocio">
         <mat-icon matPrefix>business</mat-icon>
-        <mat-error color="red">{{ mailErrorMessage('name','El nombre no es válido') }}</mat-error>
-    </mat-form-field>
+        <mat-error color="red">{{ mailErrorMessage('nombre_legal','El nombre legal no es válido') }}</mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline">
+        <mat-label>NIF/CIF</mat-label>
+        <input formControlName="nif" [readonly]="false" matNativeControl type="text"
+          placeholder="Introduzca el NIF/ CIF de su negocio">
+        <mat-icon matPrefix>gavel</mat-icon>
+        <mat-error color="red">{{ mailErrorMessage('nif','El NIF/CIF no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Correo</mat-label>
         <input formControlName="email" [readonly]="false" matNativeControl type="email" placeholder="yo@dominio.com">
         <mat-icon matPrefix>email</mat-icon>
         <mat-error color="red">{{ mailErrorMessage('email','El correo no es válido') }}</mat-error>
-    </mat-form-field>
+      </mat-form-field>
 
 
-    <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Teléfono</mat-label>
         <input formControlName="telefono" [readonly]="false" matNativeControl type="phone" placeholder="666555444">
         <mat-icon matPrefix>phone</mat-icon>
         <mat-error color="red">{{ mailErrorMessage('telefono','El teléfono no es válido') }}</mat-error>
-    </mat-form-field>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
         <input formControlName="password" [readonly]="false" matNativeControl type="password" placeholder="">
         <mat-icon matPrefix>password</mat-icon>
         <mat-error color="red">{{ mailErrorMessage('password','La contraseña no es válida') }}</mat-error>
-    </mat-form-field>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Repetir contraseña</mat-label>
-        <input formControlName="password" [readonly]="false" matNativeControl type="password" placeholder="">
+        <input formControlName="password_confirmation" [readonly]="false" matNativeControl type="password"
+          placeholder="">
         <mat-icon matPrefix>password</mat-icon>
-        <mat-error color="red">{{ mailErrorMessage('password','La contraseña no coincide') }}</mat-error>
-    </mat-form-field>
+        <mat-error color="red">{{ mailErrorMessage('password_confirmation','La contraseña no coincide') }}</mat-error>
+      </mat-form-field>
+    </div>
 
-    <button mat-stroked-button [mat-dialog-close]="registroUsuario.value">Solicitar cuenta</button>
-</form>
+    <button mat-stroked-button (click)="guardar()">Solicitar cuenta</button>
+  </form>
+</mat-dialog-content>

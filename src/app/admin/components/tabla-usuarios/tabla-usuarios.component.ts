@@ -48,7 +48,7 @@ export class TablaUsuariosComponent implements OnInit {
 
   editUser(usered: User, errors?: string[]) {
     const dialogoEditar = this.dialog.open(EditUserComponent, {
-      width: '100%',
+      width: '500px',
       data: { user: usered, errors: errors }
     })
     dialogoEditar.afterClosed().subscribe(result => {

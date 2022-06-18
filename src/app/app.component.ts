@@ -12,6 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
+import { SinCentrosComponent } from './shared/sin-centros/sin-centros.component';
 
 
 @Component({
@@ -40,7 +41,17 @@ export class AppComponent {
         this.sesionStatus = true;
         this.authService.profile().subscribe((res: GestronRequest) => {
           this.authService.setUsuario(res.data.user as User);
-          this.authService.setCentros(res.data.centros as Centro[]);
+          if ((res.data.centros || []).length > 0) {
+            this.authService.setCentros(res.data.centros as Centro[] || []);
+          } else {
+            let dialogoNoCentros = this.dialog.open(SinCentrosComponent, {
+              disableClose: true,
+            });
+
+            dialogoNoCentros.afterClosed().subscribe(r => {
+              this.logout();
+            });
+          }
           dialogLoading.close();
           this.allLoaded = true;
           let snackBarRef = this.snackBar.open('Bienvenido de nuevo ' + this.authService.getUsuario().name + '.', '', { duration: 5000 });

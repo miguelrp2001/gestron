@@ -6,17 +6,10 @@
     <strong *ngIf="data.errors['nombre_corto']">{{data.errors['nombre_corto']}}</strong>
     <strong *ngIf="data.errors['color']">{{data.errors['color']}}</strong>
     <strong *ngIf="data.errors['familia']">{{data.errors['familia']}}</strong>
+    <strong *ngIf="data.errors['codBarras']">{{data.errors['codBarras']}}</strong>
   </div>
   <form [formGroup]="editarArticulo">
     <div class="aligned">
-      <mat-form-field appearance="outline" *ngIf="!this.data.create">
-        <mat-label>Código</mat-label>
-        <input formControlName="id" [readonly]="true" matNativeControl type="number"
-          placeholder="Generado automáticamente">
-        <mat-icon matPrefix>badge</mat-icon>
-        <mat-error color="aed"></mat-error>
-      </mat-form-field>
-
       <mat-form-field appearance="outline">
         <mat-label>Nombre</mat-label>
         <input formControlName="nombre" cdkFocusInitial [readonly]="false" matNativeControl type="text">
@@ -29,6 +22,13 @@
         <input formControlName="nombre_corto" [readonly]="false" matNativeControl type="text">
         <mat-icon matPrefix>format_size</mat-icon>
         <mat-error color="red">{{ errorMessage('nombre_corto','El nombre corto no es válido') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Código de barras</mat-label>
+        <input formControlName="codBarras" [readonly]="false" matNativeControl type="text">
+        <mat-icon matPrefix>qr_code</mat-icon>
+        <mat-error color="red">{{ errorMessage('codBarras','El código de barras no es válido') }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">

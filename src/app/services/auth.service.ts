@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from './token.service';
-import { GestronRequest, User, Centro } from '../interfaces/user';
+import { GestronRequest, User, Centro, FormRegistro } from '../interfaces/user';
 import { SecureStorageService } from './secure-storage.service';
 import { BACKEND } from './gestronbackend.service';
 
@@ -14,7 +14,7 @@ export const AUTHURL = BACKEND + "auth/";
   providedIn: 'root'
 })
 export class AuthService {
-  private usuario: User = {} as User;
+  private usuario: User = { admin: true } as User;
   private centros: Centro[] = [];
   private centroSeleccionado: Centro = {} as Centro;
 
@@ -65,6 +65,10 @@ export class AuthService {
     return this.http.post<GestronRequest>(AUTHURL + 'login', user);
   }
 
+  register(formularioRegistro: FormRegistro): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(AUTHURL + 'register', formularioRegistro);
+  }
+
   profile(): Observable<GestronRequest> {
     const headers: HttpHeaders = new HttpHeaders({
       Authorization: 'Bearer ' + this.token.getToken
@@ -73,10 +77,21 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.usuario.admin || true;
+    if (this.usuario) {
+      return this.usuario.admin;
+    } else { return true }
+
   }
 
   logout(): Observable<GestronRequest> {
     return this.http.post<GestronRequest>(AUTHURL + 'logout', {});
+  }
+
+  verify(codigo: string): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(AUTHURL + 'verify', { vercode: codigo });
+  }
+
+  resendVerification(): Observable<GestronRequest> {
+    return this.http.post<GestronRequest>(AUTHURL + 'resendverificationcode', {});
   }
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GestronbackendService } from '../../services/gestronbackend.service';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DiagReceived } from '../../admin/components/edit-centro/edit-centro.component';
-import { User } from '../../interfaces/user';
+import { User, FormRegistro } from '../../interfaces/user';
+
+export interface DiagReceived { data: FormRegistro; create: boolean; errors?: Error; };
+export interface Error { nombre?: string[]; email?: string[]; password?: string[]; password_confirmation?: string[]; nombre_empresa?: string[]; nombre_legal?: string[]; telefono?: string[]; nif?: string[]; };
 
 @Component({
   selector: 'app-register-form',
@@ -14,20 +15,27 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<DiagReceived>,
     @Inject(MAT_DIALOG_DATA) public data: DiagReceived,) {
-
   }
 
-  usuarioNuevo: User = {} as User;
+  usuarioNuevo: FormRegistro = this.data.data || {} as FormRegistro;
   registroUsuario: FormGroup = this.fb.group({
-    id: [this.usuarioNuevo.id],
-    email: [this.usuarioNuevo.email, [Validators.required, Validators.email]],
-    name: [this.usuarioNuevo.name, [Validators.required, Validators.minLength(2)]],
+    email: [this.usuarioNuevo.email, [Validators.required, Validators.email, Validators.maxLength(50)]],
+    nombre: [this.usuarioNuevo.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
     telefono: [this.usuarioNuevo.telefono, [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-    ipRegistro: [this.usuarioNuevo.ipRegistro],
-    ipUltLogin: [this.usuarioNuevo.ipUltLogin],
-    updated_at: [this.usuarioNuevo.updated_at],
-    created_at: [this.usuarioNuevo.created_at]
+    password: [this.usuarioNuevo.password, [Validators.required, Validators.minLength(6), Validators.maxLength(90)]],
+    nif: [this.usuarioNuevo.nif, [Validators.required, Validators.minLength(9), Validators.maxLength(12)]],
+    password_confirmation: [this.usuarioNuevo.password_confirmation, [Validators.required, Validators.minLength(6), Validators.maxLength(90), this.camposIguales]],
+    nombre_empresa: [this.usuarioNuevo.nombre_empresa, [Validators.required, Validators.minLength(6)]],
+    nombre_legal: [this.usuarioNuevo.nombre_legal, [Validators.required, Validators.minLength(6)]],
   })
+
+  camposIguales(control: AbstractControl): ValidationErrors | null {
+
+    if (control.parent?.get('password')?.value == control.value) {
+      return null;
+    }
+    return { 'igual': true };
+  }
 
   mailErrorMessage(inputName: string, inputShow: string) {
     let input = this.registroUsuario.get(inputName) || null;
@@ -42,6 +50,16 @@ export class RegisterFormComponent implements OnInit {
     return "";
 
   }
+
+  guardar() {
+    if (this.registroUsuario.valid) {
+      this.dialogRef.close(this.registroUsuario.value);
+    } else {
+      this.registroUsuario.markAllAsTouched();
+    }
+  }
+
+
   ngOnInit(): void {
   }
 

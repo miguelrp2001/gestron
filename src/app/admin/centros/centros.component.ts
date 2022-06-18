@@ -123,6 +123,26 @@ export class CentrosComponent implements OnInit {
     })
   }
 
+  editarCentro(centro: Centro, errors?: string[]) {
+    const dialogoEditarCentro = this.dialog.open(EditCentroComponent, {
+      data: { centro: centro, create: false, errors: errors },
+    });
+
+    dialogoEditarCentro.afterClosed().subscribe(res => {
+      if (res) {
+        this.gestronapi.editarCentro(res as Centro).subscribe((res: GestronRequest) => {
+          this.updateCentros();
+          this.snackbar.open('Se ha actualizado el centro ' + res.data.centro?.nombre || '', '', { duration: 5000 })
+        }, (error) => {
+          this.snackbar.open(error.error.message || '', '', { duration: 5000 })
+          this.editarCentro(res as Centro, error.error.errors);
+        });
+      } else {
+        this.snackbar.open('Operación cancelada.', '', { duration: 5000 })
+      }
+    });
+  }
+
   admins: User[] = [];
   getAdmins(centro: Centro) {
     this.cargandoAdmins = true;

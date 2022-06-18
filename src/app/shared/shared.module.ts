@@ -6,6 +6,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LoadingDialogComponent } from './loading-dialog/loading-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MaterialModule } from '../material/material.module';
+import { VerificarCuentaComponent } from './verificar-cuenta/verificar-cuenta.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SinCentrosComponent } from './sin-centros/sin-centros.component';
 
 
 
@@ -13,13 +16,17 @@ import { MaterialModule } from '../material/material.module';
   declarations: [
     BackwimageComponent,
     ConnectionErrorComponent,
-    LoadingDialogComponent
+    LoadingDialogComponent,
+    VerificarCuentaComponent,
+    SinCentrosComponent
   ],
   imports: [
     CommonModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     BackwimageComponent

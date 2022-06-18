@@ -238,8 +238,12 @@ export class GestronbackendService {
     return this.http.put<GestronRequest>(BACKEND + 'puntosVenta/' + puntoVenta.id + '/edit', puntoVenta);
   }
 
-  public deletePuntoVenta(puntoVenta: PuntoVenta): Observable<GestronRequest> {
-    return this.http.delete<GestronRequest>(BACKEND + 'puntosVenta/' + puntoVenta.id);
+  public chgPuntoVentaEstado(id: number, estado?: boolean): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'puntosVenta/' + id + '/status', { estado: estado });
+  }
+
+  public regenerarToken(puntoVenta: PuntoVenta): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'puntosVenta/' + puntoVenta.id + '/regenerarToken', {});
   }
 
 }

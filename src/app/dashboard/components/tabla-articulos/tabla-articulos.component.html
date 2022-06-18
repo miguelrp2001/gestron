@@ -1,45 +1,58 @@
 <div class="fondoTabla">
-    <table mat-table [dataSource]="articulos">
-        <ng-container matColumnDef="color">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let articulo">
-                <div class="lineaColor" style="background-color: {{articulo.color}};"> </div>
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let articulo"> {{articulo.id}} </td>
-        </ng-container>
-        <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let articulo"> {{articulo.nombre}} </td>
-        </ng-container>
-        <ng-container matColumnDef="nombre_corto">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let articulo" class="acorta"> {{articulo.nombre_corto}} </td>
-        </ng-container>
-        <ng-container matColumnDef="familia">
-            <th mat-header-cell *matHeaderCellDef> Familia </th>
-            <td mat-cell *matCellDef="let articulo"> {{nombreFamilia(articulo)}} </td>
-        </ng-container>
-        <ng-container matColumnDef="activo">
-            <th mat-header-cell *matHeaderCellDef> Estado </th>
-            <td mat-cell *matCellDef="let articulo">
-                <mat-slide-toggle #s{{articulo.id}} [checked]="activo(articulo.estado)" matTooltip="Cambiar estado" matTooltipPosition="left" matTooltipHideDelay="100" title="Cambiar estado" [id]="articulo.id" (change)="updateStatus($event)"></mat-slide-toggle>
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="updated_at">
-            <th mat-header-cell *matHeaderCellDef> Últ. Actualización </th>
-            <td mat-cell *matCellDef="let articulo"> {{articulo.updated_at}} </td>
-        </ng-container>
-        <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef> Acciones </th>
-            <td mat-cell *matCellDef="let articulo">
-                <button mat-icon-button (click)="editarArticulo(articulo)" matTooltip="Editar artículo" matTooltipPosition="right" matTooltipHideDelay="100" title="Editar artículo"><mat-icon>edit</mat-icon></button>
-            </td>
-        </ng-container>
+  <table mat-table [dataSource]="articulos">
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let articulo">
+        <div class="lineaColor" style="background-color: {{articulo.color}};"> </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.nombre}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nombre_corto">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let articulo" class="acorta"> {{articulo.nombre_corto}} </td>
+    </ng-container>
+    <ng-container matColumnDef="codBarras">
+      <th mat-header-cell *matHeaderCellDef> Código de barras </th>
+      <td mat-cell *matCellDef="let articulo" class="acorta"> {{articulo.codBarras || "-"}} </td>
+    </ng-container>
+    <ng-container matColumnDef="familia">
+      <th mat-header-cell *matHeaderCellDef> Familia </th>
+      <td mat-cell *matCellDef="let articulo"> {{nombreFamilia(articulo)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="activo">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let articulo">
+        <mat-slide-toggle #s{{articulo.id}} [checked]="activo(articulo.estado)" matTooltip="Cambiar estado"
+          matTooltipPosition="left" matTooltipHideDelay="100" title="Cambiar estado" [id]="articulo.id"
+          (change)="updateStatus($event)"></mat-slide-toggle>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="updated_at">
+      <th mat-header-cell *matHeaderCellDef> Últ. Actualización </th>
+      <td mat-cell *matCellDef="let articulo"> {{articulo.updated_at}} </td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let articulo">
+        <button mat-icon-button (click)="editarArticulo(articulo)" matTooltip="Editar artículo"
+          matTooltipPosition="right" matTooltipHideDelay="100" title="Editar artículo">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="(isHandset$ | async)? ['color','nombre_corto', 'familia', 'activo', 'acciones']:['color', 'nombre', 'familia', 'activo', 'acciones']"></tr>
-        <tr mat-row *matRowDef="let row; columns: (isHandset$ | async)? ['color','nombre_corto', 'familia', 'activo', 'acciones']:['color', 'nombre', 'familia', 'activo', 'acciones'];"></tr>
-    </table>
+    <tr mat-header-row
+      *matHeaderRowDef="(isHandset$ | async)? ['color','nombre_corto', 'familia', 'activo', 'acciones']:['color', 'nombre', 'codBarras','familia', 'activo', 'acciones']">
+    </tr>
+    <tr mat-row
+      *matRowDef="let row; columns: (isHandset$ | async)? ['color','nombre_corto', 'familia', 'activo', 'acciones']:['color', 'nombre', 'codBarras','familia', 'activo', 'acciones'];">
+    </tr>
+  </table>
 </div>

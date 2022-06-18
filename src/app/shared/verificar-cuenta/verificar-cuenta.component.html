@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Debe verificar su cuenta</h2>
+<mat-dialog-content>
+  <div class="errors" *ngIf="data.errors" color>
+    <strong *ngIf="data.errors['nombre']">{{data.errors['nombre']}}</strong>
+  </div>
+  <div class="errors" *ngIf="errorMSG" color>
+    <strong *ngIf="errorMSG">{{errorMSG}}</strong>
+  </div>
+  <div class="info" *ngIf="info" color>
+    <strong>{{info}}</strong>
+  </div>
+  <span>
+    Hemos enviado un código de verificación a su correo electrónico.
+    Si no lo ha recibido (ni en su bandeja de correo no deseado), puede solicitarlo de nuevo.
+  </span>
+  <form [formGroup]="verificarUsuario">
+    <div class="aligned">
+      <mat-form-field appearance="outline">
+        <mat-label>Código de verificación</mat-label>
+        <input formControlName="vercode" cdkFocusInitial [readonly]="false" matNativeControl matInput type="number">
+        <mat-icon matPrefix>how_to_reg</mat-icon>
+        <mat-error color="red">{{ errorMessage('vercode','El código no es válido') }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="espaciado">
+      <button mat-stroked-button color="accent" (click)="enviarCodigoDeNuevo()">Solicitar otro código</button>
+      <button mat-stroked-button color="primary" (click)="guardar()">Verificar</button>
+    </div>
+  </form>
+
+</mat-dialog-content>

@@ -4,7 +4,7 @@
       <div class="progressspin" *ngIf="actualizandoPOSs()">
         <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
       </div>
-      <app-tabla-pos *ngIf="!actualizandoPOSs()" [puntosventa]="puntosventa" (actualizarArticulos)="actualizarPOS()">
+      <app-tabla-pos *ngIf="!actualizandoPOSs()" [puntosventa]="puntosventa" (actualizarPOS)="actualizarPOS()">
       </app-tabla-pos>
     </mat-card-content>
   </mat-card>
