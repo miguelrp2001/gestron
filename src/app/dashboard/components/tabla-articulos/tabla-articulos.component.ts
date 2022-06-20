@@ -77,7 +77,6 @@ export class TablaArticulosComponent implements OnInit {
           this.actualizarArticulos.emit('upd');
           let snackBarRef = this.snackBar.open("Artículo actualizado con éxito.", '', { duration: 1500 });
         }, (error) => {
-          console.log(error.error.errors);
           this.snackBar.open(error.error.message || '', '', { duration: 5000 })
           this.editarArticulo(result, error.error.errors);
         });

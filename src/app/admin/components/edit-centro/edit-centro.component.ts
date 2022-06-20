@@ -17,8 +17,6 @@ export class EditCentroComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<DiagReceived>,
     @Inject(MAT_DIALOG_DATA) public data: DiagReceived,) {
 
-    console.log(this.data.errors);
-
   }
 
   editarCentro: FormGroup = this.fb.group({

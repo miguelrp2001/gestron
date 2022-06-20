@@ -139,7 +139,6 @@ export class AppComponent {
   }
 
   logout() {
-    console.log('Login out');
     this.authService.logout().subscribe(r => {
       if (r.data.mensaje) {
         if (r.data.mensaje == "logout") {

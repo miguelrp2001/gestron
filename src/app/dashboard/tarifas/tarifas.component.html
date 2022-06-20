@@ -12,6 +12,18 @@
         <mat-panel-title>
           {{tarifa.nombre}}
         </mat-panel-title>
+        <mat-panel-description>
+          <button matTooltip="Ya es predeterminada" matTooltipPosition="left" matTooltipHideDelay="100"
+            title="Ya es predeterminada" mat-icon-button disabled (click)="setDefault(tarifa)"
+            *ngIf="centroSeleccionado.tarifaSeleccionada === tarifa.id">
+            <mat-icon>star</mat-icon>
+          </button>
+          <button matTooltip="Hacer predeterminada" matTooltipPosition="left" matTooltipHideDelay="100"
+            title="Hacer predeterminada" mat-icon-button (click)="setDefault(tarifa)"
+            *ngIf="centroSeleccionado.tarifaSeleccionada !== tarifa.id">
+            <mat-icon>star_border</mat-icon>
+          </button>
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-list>
         <div mat-subheader>Precios de la tarifa <span class=" spacer"></span> <button mat-icon-button

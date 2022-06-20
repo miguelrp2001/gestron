@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AUTHURL } from './auth.service';
 import { SecureStorageService } from './secure-storage.service';
 
 @Injectable({

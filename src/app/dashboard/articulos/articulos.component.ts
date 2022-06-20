@@ -48,8 +48,6 @@ export class ArticulosComponent implements OnInit {
         this.articuloNuevo = res as Articulo;
         this.apibackend.crearArticulo(res as Articulo).subscribe((res: GestronRequest) => {
           this.actualizarArticulos();
-          console.log(res);
-
           this.snackBar.open('Se ha creado el artículo ' + res.data.articulo?.nombre || '', '', { duration: 5000 })
           this.articuloNuevo = {
             nombre: "",
@@ -60,8 +58,6 @@ export class ArticulosComponent implements OnInit {
             id: 0
           };
         }, (error) => {
-          console.log(error);
-
           this.snackBar.open(error.error.message || '', '', { duration: 5000 })
           this.createArticulo(error.error.errors);
         })

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { GestronbackendService } from '../../services/gestronbackend.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GestronRequest, Tarifa, Precio, Articulo, Impuesto } from '../../interfaces/user';
+import { GestronRequest, Tarifa, Precio, Articulo, Impuesto, Centro } from '../../interfaces/user';
 import { AddArticulosTarifaComponent } from '../components/add-articulos-tarifa/add-articulos-tarifa.component';
 import { MatListOption } from '@angular/material/list';
 import { EditPrecioComponent } from '../components/edit-precio/edit-precio.component';
 import { EditTarifaComponent } from '../components/edit-tarifa/edit-tarifa.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-tarifas',
@@ -20,9 +21,11 @@ export class TarifasComponent implements OnInit {
   cargandoPrecios: boolean = false;
   precios: Precio[] = [];
 
+  centroSeleccionado: Centro = this.authservice.getCentroSeleccionado();
+
   tarifaNueva: Tarifa = { id: 0, nombre: "" };
 
-  constructor(private gestronapi: GestronbackendService, private dialog: MatDialog, private snackbar: MatSnackBar) {
+  constructor(private gestronapi: GestronbackendService, private dialog: MatDialog, private snackbar: MatSnackBar, private authservice: AuthService) {
     this.updateTarifas();
   }
 
@@ -35,12 +38,18 @@ export class TarifasComponent implements OnInit {
     this.gestronapi.obtenerTarifas().subscribe((res: GestronRequest) => {
       if (res.data.tarifas) {
         this.tarifas = res.data.tarifas as Tarifa[];
+
+        if (res.data.centro) {
+          this.centroSeleccionado = res.data.centro as Centro;
+        }
+
         this.gestronapi.obtenerImpuestos().subscribe((res: GestronRequest) => {
           if (res.data.impuestos) {
             this.impuestos = res.data.impuestos as Impuesto[];
           }
         });
       }
+
       this.cargandoTarifas = false;
     });
   }
@@ -146,6 +155,13 @@ export class TarifasComponent implements OnInit {
           this.createTarifa(error.error.errors);
         });
       }
+    });
+  }
+
+  setDefault(tarifa: Tarifa) {
+    this.gestronapi.setDefaultTarifa(tarifa).subscribe((res: GestronRequest) => {
+      this.updateTarifas();
+      this.snackbar.open("Se ha cambiado la tarifa por defecto", '', { duration: 3000 })
     });
   }
 

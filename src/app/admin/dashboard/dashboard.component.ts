@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
 
   activateLink(index: number, linkIsActivated: boolean) {
     this.activeLinkIndex = index;
-    console.log(linkIsActivated);
   }
 
   background: ThemePalette = 'primary';

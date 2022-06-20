@@ -22,7 +22,6 @@ export class TablaPosComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver, private apibackend: GestronbackendService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    console.log(this.puntosventa);
   }
 
   updateStatus(slider: any) {

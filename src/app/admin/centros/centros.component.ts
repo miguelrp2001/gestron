@@ -105,8 +105,6 @@ export class CentrosComponent implements OnInit {
             telefono: "",
           };
         }, (error) => {
-          console.log(error);
-
           this.snackbar.open(error.error.message || '', '', { duration: 5000 })
           this.createCentro(error.error.errors);
         })

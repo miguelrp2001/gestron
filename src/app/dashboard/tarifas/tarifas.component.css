@@ -20,7 +20,12 @@ div.backg {
   right: 2em;
 }
 
-.errorCentrado{
+.errorCentrado {
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: flex-end;
+  align-items: center;
 }

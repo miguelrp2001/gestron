@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { User, GestronRequest, Centro, Articulo, Familia, Tarifa, Precio, Perfil, Cliente, PuntoVenta } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -160,6 +160,10 @@ export class GestronbackendService {
 
   public getArticulosNoTarifa(tarifa: Tarifa): Observable<GestronRequest> {
     return this.http.get<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id + '/notArticulos');
+  }
+
+  public setDefaultTarifa(tarifa: Tarifa): Observable<GestronRequest> {
+    return this.http.put<GestronRequest>(BACKEND + 'tarifas/' + tarifa.id + '/default', {});
   }
 
   // Gestión de precios

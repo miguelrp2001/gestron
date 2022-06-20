@@ -61,6 +61,7 @@ export interface Centro {
   telefono: string;
   direccion: string;
   administradores?: User[];
+  tarifaSeleccionada?: number;
   updated_at?: Date;
   created_at?: Date;
 }

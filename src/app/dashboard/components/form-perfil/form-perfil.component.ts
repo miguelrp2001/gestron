@@ -19,7 +19,7 @@ export class FormPerfilComponent implements OnInit {
   editarPerfil: FormGroup = this.fb.group({
     id: [this.data.perfil.id],
     nombre: [this.data.perfil.nombre, [Validators.required, Validators.minLength(1), Validators.maxLength(15)]],
-    clave: [this.data.perfil.clave, [Validators.min(1000), Validators.min(4), Validators.maxLength(16)]],
+    clave: [this.data.perfil.clave, [Validators.required, Validators.min(1000), Validators.min(4), Validators.maxLength(16)]],
     updated_at: [this.data.perfil.updated_at],
     created_at: [this.data.perfil.created_at]
   })

@@ -61,7 +61,6 @@ export class TablaPerfilesComponent implements OnInit {
           this.actualizarPerfiles.emit('upd');
           let snackBarRef = this.snackBar.open("Perfil actualizado con éxito.", '', { duration: 1500 });
         }, (error) => {
-          console.log(error.error.errors);
           this.snackBar.open(error.error.message || '', '', { duration: 5000 })
           this.editarPerfil(result, error.error.errors);
         });

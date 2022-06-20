@@ -46,16 +46,12 @@ export class FamiliasComponent implements OnInit {
         this.familiaNueva = res as Familia;
         this.apibackend.crearFamilia(res as Familia).subscribe((res: GestronRequest) => {
           this.actualizarFamilias();
-          console.log(res);
-
           this.snackBar.open('Se ha creado la familia ' + res.data.familia?.nombre || '', '', { duration: 5000 })
           this.familiaNueva = {
             id: 0,
             nombre: ""
           };
         }, (error) => {
-          console.log(error);
-
           this.snackBar.open(error.error.message || '', '', { duration: 5000 })
           this.crearFamilia(error.error.errors);
         })

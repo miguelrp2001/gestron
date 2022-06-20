@@ -35,8 +35,18 @@ div.errors strong {
   -moz-text-security: disc;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 @media screen and (max-width:575px) {
   mat-form-field {
-      width: 100%;
+    width: 100%;
   }
 }

@@ -60,7 +60,6 @@ export class TablaUsuariosComponent implements OnInit {
           }
           let snackBarRef = this.snackBar.open("Usuario actualizado con éxito.", '', { duration: 5000 });
         }, (error) => {
-          console.log(error.error.errors);
           this.snackBar.open(error.error.message || '', '', { duration: 5000 })
           this.editUser({ id: usered.id, name: result.name, email: result.email, telefono: result.telefono, ipRegistro: usered.ipRegistro, ipUltLogin: usered.ipUltLogin } as User, error.error.errors);
         });

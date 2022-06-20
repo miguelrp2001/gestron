@@ -103,7 +103,6 @@ export class LoginIndexComponent implements OnInit {
         (error) => {
           this.iniciandoSesion = false;
           this.errores = error.error;
-          console.warn(error);
           if (error.error.data && error.error.data.mensaje == "no me sirve") {
             let snackBarRef = this.snackBar.open("Credenciales inválidos.", '', { duration: 5000 });
             this.formularioLogin.get('password')?.setValue("");
