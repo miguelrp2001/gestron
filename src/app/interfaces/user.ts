@@ -46,7 +46,7 @@ export interface Articulo {
   nombre: string;
   nombre_corto: string;
   color: string;
-  codBarras?: string;
+  codbarras?: string;
   familia_id?: number;
   familia?: number;
   created_at?: null;

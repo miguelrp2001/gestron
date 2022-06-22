@@ -22,7 +22,7 @@ export class FormArticuloComponent implements OnInit {
     id: [this.data.articulo.id],
     nombre: [this.data.articulo.nombre, [Validators.required, Validators.minLength(1), Validators.maxLength(25)]],
     nombre_corto: [this.data.articulo.nombre_corto, [Validators.required, Validators.minLength(1), Validators.maxLength(15)]],
-    codbarras: [this.data.articulo.codBarras, [Validators.minLength(1), Validators.maxLength(50)]],
+    codbarras: [this.data.articulo.codbarras, [Validators.minLength(1), Validators.maxLength(50)]],
     color: [this.data.articulo.color, [Validators.required, Validators.pattern("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")]],
     familia: [this.data.articulo.familia_id || this.data.articulo.familia, [Validators.required]],
     updated_at: [this.data.articulo.updated_at],

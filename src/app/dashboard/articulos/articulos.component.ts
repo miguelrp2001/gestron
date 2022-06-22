@@ -21,7 +21,7 @@ export class ArticulosComponent implements OnInit {
     nombre: "",
     nombre_corto: "",
     color: "#FFFFFF",
-    codBarras: "",
+    codbarras: "",
     familia_id: 0,
     estado: "a",
     id: 0,
