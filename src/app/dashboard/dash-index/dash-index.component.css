@@ -1,0 +1,39 @@
+div.backg {
+  padding: 1em;
+
+}
+
+.orden {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+mat-card {
+  width: 40em;
+}
+
+.progressspin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  mat-card {
+    width: 100%;
+  }
+
+  .orden {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 93%;
+    gap: 1em;
+  }
+
+}

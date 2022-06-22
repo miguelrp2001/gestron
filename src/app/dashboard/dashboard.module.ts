@@ -23,6 +23,7 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './components/form-clientes/form-clientes.component';
 import { TablaPosComponent } from './components/tabla-pos/tabla-pos.component';
 import { FormPosComponent } from './components/form-pos/form-pos.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -54,7 +55,8 @@ import { FormPosComponent } from './components/form-pos/form-pos.component';
     FormsModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule
   ]
 })
 export class DashboardModule { }

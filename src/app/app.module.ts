@@ -13,10 +13,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AdminModule } from './admin/admin.module';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,8 @@ import { AdminModule } from './admin/admin.module';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    AdminModule
+    AdminModule,
+    NgChartsModule
   ],
   providers: [
     {

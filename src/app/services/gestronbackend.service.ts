@@ -254,4 +254,10 @@ export class GestronbackendService {
     return this.http.put<GestronRequest>(BACKEND + 'puntosVenta/' + puntoVenta.id + '/regenerarToken', {});
   }
 
+  //dashboard
+
+  public getDashboard(): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'dashboard/' + this.authService.getCentroSeleccionado().id + '/stats');
+  }
+
 }

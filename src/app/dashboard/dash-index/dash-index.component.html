@@ -1,3 +1,36 @@
-<p>dash-index works!</p>
-<p>Email: {{user().email}}</p>
-<p>Name: {{user().name}}</p>
+<div class="backg">
+  <mat-card *ngIf="loading">
+    <mat-card-content>
+      <div class=" progressspin">
+        <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="orden" *ngIf="!loading">
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h1>Tickets del día</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="ChartOptions">
+        </canvas>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h1>Lineas por trabajadores</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas baseChart [data]="barChartData" [type]="barChartType" [options]="ChartOptions">
+        </canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

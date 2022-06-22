@@ -27,6 +27,7 @@ export interface Data {
   puntosVenta?: PuntoVenta[];
   ticket?: Ticket;
   tickets?: Ticket[];
+  stats?: Stats;
 }
 
 export interface User {
@@ -154,6 +155,19 @@ export interface Ticket {
   fecha: Date;
   total: number;
   estado: string;
+}
+
+export interface Stats {
+  ticketsCobrados: number;
+  ticketsPendientes: number;
+  ticketsAnulados: number;
+  lineasPorTrabajador: LineaPorTrabajador[];
+}
+
+export interface LineaPorTrabajador {
+  nombre: string;
+  anulaciones: number;
+  marcadas: number;
 }
 
 // Converts JSON strings to/from your types
