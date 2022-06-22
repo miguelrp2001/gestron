@@ -12,6 +12,7 @@
         <input formControlName="precio" #precio cdkFocusInitial (focus)="precio.select()" matInput [readonly]="false"
           matNativeControl type="number">
         <mat-icon matPrefix>local_offer</mat-icon>
+        <mat-icon matSuffix>euro</mat-icon>
         <mat-error color="red">{{ errorMessage('precio','El precio no es válido') }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">

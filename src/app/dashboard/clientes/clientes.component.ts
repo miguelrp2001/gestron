@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente, GestronRequest } from '../../interfaces/user';
+import { Cliente, GestronRequest, Ticket } from '../../interfaces/user';
 import { GestronbackendService } from '../../services/gestronbackend.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,13 +15,15 @@ export class ClientesComponent implements OnInit {
   public clientes: Cliente[] = [];
   cargandoClientes: boolean = true;
   cargandoDatosCliente: boolean = false;
-  datosCliente: string[] = [];
+  datosCliente: Ticket[] = [];
 
   clienteNuevo: Cliente = { id: 0, nombre: "", direccion: "", telefono: "", correo: "", nif: "", nombre_fiscal: "", centro_id: this.authService.getCentroSeleccionado().id };
 
   constructor(private gestronapi: GestronbackendService, private dialog: MatDialog, private snackbar: MatSnackBar, private authService: AuthService) {
     this.updateClientes();
   }
+
+  date: Date = new Date();
 
   ngOnInit(): void {
   }
@@ -52,7 +54,12 @@ export class ClientesComponent implements OnInit {
 
   getDatos(cliente: Cliente) {
     this.cargandoDatosCliente = true;
-    this.datosCliente = [];
+
+    this.gestronapi.obtenerInfoCliente(cliente.id).subscribe((res: GestronRequest) => {
+      this.datosCliente = res.data.tickets as Ticket[];
+      this.cargandoDatosCliente = false;
+
+    });
   }
 
 

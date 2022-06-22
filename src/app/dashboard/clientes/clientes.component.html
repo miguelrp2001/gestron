@@ -47,24 +47,13 @@
           No hay tickets para mostrar
         </div>
         <div *ngIf="!cargandoDatosCliente">
-          <!-- <mat-list>
-
-            <mat-list-item *ngFor="let precio of precios">
+          <mat-list>
+            <mat-list-item *ngFor="let ticket of datosCliente">
               <mat-icon mat-list-icon>shopping_cart</mat-icon>
-              <div mat-line>{{precio.articulo.nombre}}</div>
-              <div mat-line>{{precio.precio}}€ ({{precio.impuesto.nombre }})</div>
-              <button mat-icon-button color="accent" id="{{precio.id+'_EDIT'}}"
-                (click)="editPrecioTarifa(precio, tarifa)" matTooltip="Editar precio" matTooltipPosition="above"
-                matTooltipHideDelay="100" title="Editar precio">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button color="warn" id="{{precio.id+'_DEL'}}"
-                (click)="deletePrecioTarifa(precio, tarifa)" matTooltip="Eliminar precio" matTooltipPosition="above"
-                matTooltipHideDelay="100" title="Eliminar precio">
-                <mat-icon>remove</mat-icon>
-              </button>
+              <div mat-line>#{{ticket.id}}</div>
+              <div mat-line>{{ticket.total}}€ ({{ticket.fecha}})</div>
             </mat-list-item>
-          </mat-list> -->
+          </mat-list>
         </div>
       </mat-list>
       <mat-action-row>

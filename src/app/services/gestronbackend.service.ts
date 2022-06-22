@@ -228,6 +228,10 @@ export class GestronbackendService {
     return this.http.put<GestronRequest>(BACKEND + 'clientes/' + id + '/mailstatus', { estado: estado });
   }
 
+  public obtenerInfoCliente(id: number): Observable<GestronRequest> {
+    return this.http.get<GestronRequest>(BACKEND + 'clientes/' + id);
+  }
+
   // Gestión de puntos de venta
 
   public obtenerPuntosVenta(): Observable<GestronRequest> {

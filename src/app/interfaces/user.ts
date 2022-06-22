@@ -25,6 +25,8 @@ export interface Data {
   impuestos?: Impuesto[];
   puntoVenta?: PuntoVenta;
   puntosVenta?: PuntoVenta[];
+  ticket?: Ticket;
+  tickets?: Ticket[];
 }
 
 export interface User {
@@ -145,6 +147,13 @@ export interface FormRegistro {
   nombre_empresa: string;
   nombre_legal: string;
   nif: string;
+}
+
+export interface Ticket {
+  id: number;
+  fecha: Date;
+  total: number;
+  estado: string;
 }
 
 // Converts JSON strings to/from your types
