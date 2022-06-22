@@ -82,10 +82,10 @@
           <mat-icon>admin_panel_settings</mat-icon>
           Panel de administrador
         </button>
-        <button *ngIf="sesionIniciada()" mat-menu-item aria-label="Panel de configuración de cuenta.">
+        <!-- <button *ngIf="sesionIniciada()" mat-menu-item aria-label="Panel de configuración de cuenta.">
           <mat-icon>settings</mat-icon>
           Preferencias
-        </button>
+        </button> -->
         <button *ngIf="sesionIniciada()" (click)="logout()" mat-menu-item aria-label="Botón cerrar sesión.">
           <mat-icon>logout</mat-icon>
           Cerrar sesión
